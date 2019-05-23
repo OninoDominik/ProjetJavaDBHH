@@ -61,8 +61,17 @@ public class TuileCarteController {
     @GetMapping(path = "/detail/{id}")
     public String afficheCarte(@PathVariable int id, Model model) {
         TuileCarte tuileCarte = tuileCarteRepository.findById(id);
-        model.addAttribute("tuileCarte", tuileCarte);
-        return "TuileCarteDetail";
+        if (tuileCarte!=null) {
+            model.addAttribute("tuileCarte", tuileCarte);
+            return "TuileCarteDetail";
+        } else
+        {
+            String code="400";
+            String message="L'id de l'objet CarteTuile n'existe pas";
+            model.addAttribute("code", code);
+            model.addAttribute("message", message);
+            return "error";
+        }
     }
 
     @GetMapping(path = "/all")
