@@ -8,14 +8,14 @@
 <body>
 
 
-<div class="container" style="overflow-x: scroll">
+<div class="container" style="">
 
     <h1>Application villesim</h1>
 
 
-    <div style="width: 100000px ">
+    <div th:style="|width: ${taille}|">
         <div th:each="product : ${produits}"  style="float: left; width: 100px ">
-            <a th:href="@{|/cartetuile-detail/${product.id}|}" >
+            <a th:href="@{|/tuilecarte/detail/${product.id}|}" >
                 <img th:src="@{${product.terrain.terrainImgUrl}}"  class="card-img-top" />
             </a>
         </div>

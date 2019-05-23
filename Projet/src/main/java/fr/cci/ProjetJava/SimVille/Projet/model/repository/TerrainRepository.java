@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TerrainRepository extends JpaRepository<Terrain, Integer> {
     Terrain findById(int id);
-
 }

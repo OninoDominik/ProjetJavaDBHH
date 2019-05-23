@@ -10,6 +10,10 @@ public class TuileCarte {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer Id;
     private Integer tuileCarteposition;
+    @ManyToOne
+    private Terrain terrain;
+    @ManyToOne
+    private Ville ville;
 
     public TuileCarte(Integer tuileCarteposition, Terrain terrain, Ville ville) {
         super();
@@ -29,11 +33,7 @@ public class TuileCarte {
     public TuileCarte() {
     }
 
-    @ManyToOne
-    private Terrain terrain;
 
-    @ManyToOne
-    private Ville ville;
 
     public Integer getId() {
         return Id;

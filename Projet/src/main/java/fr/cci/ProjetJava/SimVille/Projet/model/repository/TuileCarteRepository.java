@@ -14,4 +14,5 @@ import java.util.List;
 public interface TuileCarteRepository extends JpaRepository<TuileCarte, Integer> {
 
     List<TuileCarte> findByVille(Ville ville);
+    TuileCarte findById(int id);
 }

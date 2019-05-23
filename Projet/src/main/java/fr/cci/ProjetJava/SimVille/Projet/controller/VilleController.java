@@ -76,13 +76,16 @@ public class VilleController {
 
     }
     @GetMapping("/affiche/{toto}")
-    public String accueil(@PathVariable int toto, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
+    public String AfficheCarte(@PathVariable int toto, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
 
         Ville tempo= villeRepository.findById(toto);
         Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVille(tempo);
 
+        int taille= (tempo.getVilleLarg()*100);
+        String tailletoString= Integer.toString(taille);
+        tailletoString+="px";
+        model.addAttribute("taille",tailletoString );
         model.addAttribute("produits", TuileCarte);
-        System.out.println(System.getProperty("java.class.path"));
         return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
     }
 
