@@ -77,7 +77,6 @@ public class TuileCarteController {
                                      @RequestParam int IdTuileCarte, HttpServletResponse httpServletResponse) {
         TuileCarte tuileCarte = tuileCarteRepository.findById(IdTuileCarte);
         Terrain terrain = terrainRepository.findById(IdTerrain);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA          " +terrain.getId());
         if (terrain == null) {
             HttpHeaders headers = new HttpHeaders();
             String redirection= "/ville/affiche/"+tuileCarte.getVille().getId();
@@ -95,12 +94,7 @@ public class TuileCarteController {
         }
 
     }
-    @GetMapping(path = "/updateterrain/{id}")
-    public String afficheError(@PathVariable int id, Model model)
-    {
-        model.addAttribute("id", id);
-        return "RedirectCarte";
-    }
+
 
     @GetMapping(path = "/error")
     public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
