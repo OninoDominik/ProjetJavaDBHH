@@ -7,11 +7,22 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.TerrainRepository;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TuileCarteRepository;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 
 @Controller
 @RequestMapping(path = "/tuilecarte")
@@ -60,20 +71,44 @@ public class TuileCarteController {
         return tuileCarteRepository.findAll();
     }
 
-    @PostMapping(path = "/updateTerrain")
-    public @ResponseBody
-    ResponseEntity updateTuileCarte(@RequestParam int IdTerrain,
-                                    @RequestParam int IdTuileCarte) {
+    @PostMapping(path = "/updateterrain")
+    @ResponseBody
+    public void updateTuileCarte(@RequestParam int IdTerrain,
+                                     @RequestParam int IdTuileCarte, HttpServletResponse httpServletResponse) {
         TuileCarte tuileCarte = tuileCarteRepository.findById(IdTuileCarte);
         Terrain terrain = terrainRepository.findById(IdTerrain);
-
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA          " +terrain.getId());
         if (terrain == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            HttpHeaders headers = new HttpHeaders();
+            String redirection= "/ville/affiche/"+tuileCarte.getVille().getId();
+            headers.add("Location", redirection);
+            httpServletResponse.setHeader("Location", redirection);
+            httpServletResponse.setStatus(400);
         } else {
             tuileCarte.setTerrain(terrain);
             tuileCarteRepository.save(tuileCarte);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+            HttpHeaders headers = new HttpHeaders();
+            int id=tuileCarte.getVille().getId();
+            String redirection= "/ville/affiche/"+tuileCarte.getVille().getId();
+            httpServletResponse.setHeader("Location", redirection);
+            httpServletResponse.setStatus(302);
         }
 
     }
+    @GetMapping(path = "/updateterrain/{id}")
+    public String afficheError(@PathVariable int id, Model model)
+    {
+        model.addAttribute("id", id);
+        return "RedirectCarte";
+    }
+
+    @GetMapping(path = "/error")
+    public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
+        int code = response.getStatus();
+        String message = HttpStatus.valueOf(code).getReasonPhrase();
+        model.addAttribute("code", code);
+        model.addAttribute("message", message);
+        return "error";
+    }
+
 }
