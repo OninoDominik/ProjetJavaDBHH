@@ -5,6 +5,7 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.TerrainRepository;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TuileCarteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import fr.cci.ProjetJava.SimVille.Projet.model.Ville;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
@@ -14,7 +15,9 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
 public class VilleController {
     @Autowired
     private VilleRepository villeRepository;
+    @Autowired
     private TerrainRepository terrainRepository;
+    @Autowired
     private TuileCarteRepository tuileCarteRepository;
 
 
@@ -58,13 +61,11 @@ public class VilleController {
         n.setPolPMax(polPMax);
         n.setRivDMax(rtbDMax);
         n.setRivPMax(rtbPMax);
+        n.setForDMax(forDMax);
+        n.setForPMax(forPMax);
         villeRepository.save(n);
-        Terrain terrainForet= terrainRepository.findById(1);
-
-        for(int i =0; i<n.getVilleLong()*n.getVilleLarg(); i++)
-        {
-            tuileCarteRepository.save(new TuileCarte(i, terrainForet, n));
-        }
+        System.out.println("find by id va etre lancé");
+        setCarte(n);
         return "Saved and map created";
     }
 
@@ -73,5 +74,24 @@ public class VilleController {
     Iterable<Ville> getAllUsers() {
         return villeRepository.findAll();
 
+    }
+    @GetMapping("/affiche/{toto}")
+    public String accueil(@PathVariable int toto, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
+
+        Ville tempo= villeRepository.findById(toto);
+        Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVille(tempo);
+
+        model.addAttribute("produits", TuileCarte);
+        System.out.println(System.getProperty("java.class.path"));
+        return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
+    }
+
+    public void setCarte(Ville Ville) {
+        System.out.println(terrainRepository.findById(1));
+        Terrain terrainForet= (Terrain)terrainRepository.findById(1);
+        for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i++) {
+            TuileCarte temp =new TuileCarte(i, terrainForet, Ville);
+            tuileCarteRepository.save(temp);
+        }
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Terrain {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer terrainId;
+    private Integer Id;
     private Integer terrainType;
     private String terrainNom;
     private String terrainNomShort;
@@ -14,7 +14,7 @@ public class Terrain {
 
     public Terrain(){
          super();
-        this.terrainId = 0;
+        this.Id = 100000;
         this.terrainType = 0;
         this.terrainNom="default";
         this.terrainNomShort = "default";
@@ -23,19 +23,20 @@ public class Terrain {
 
     public Terrain(Integer terrainId,Integer terrainType,String terrainNom, String terrainNomShort, String terrainImgUrl) {
         super();
-        this.terrainId = terrainId;
+        this.Id = terrainId;
         this.terrainType = terrainType;
         this.terrainNom=terrainNom;
         this.terrainNomShort = terrainNomShort;
         this.terrainImgUrl = terrainImgUrl;
     }
 
-    public Integer getTerrainId() {
-        return this.terrainId;
+
+    public Integer getId() {
+        return this.Id;
     }
 
-    public void setTerrainId(Integer terrainId) {
-        this.terrainId = terrainId;
+    public void setId(Integer terrainId) {
+        this.Id = terrainId;
     }
 
     public Integer getTerrainType() {
@@ -69,4 +70,6 @@ public class Terrain {
     public void setTerrainImgUrl(String terrainImgUrl) {
         this.terrainImgUrl = terrainImgUrl;
     }
+
+
 }

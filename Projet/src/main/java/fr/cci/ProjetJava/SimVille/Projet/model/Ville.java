@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ import javax.persistence.Id;
 public class Ville {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer villeId;
+    private Integer Id;
     private String villeNom;
     private Integer villeLong;
     private Integer villeLarg;
@@ -56,7 +58,7 @@ public class Ville {
     }
 
     public Ville(Integer villeId, String villeNom, Integer villeLong, Integer villeLarg, float villeValeurImmoMin, float villeValeurImmoMax, float rivDMax, float rivPMax, float forDMax, float forPMax, float eclDMax, float eclPMax, float eglDMax, float eglPMax, float comDMax, float comPMax, float polDMax, float polPMax, float rtbDMax, float rtbPMax) {
-        this.villeId = villeId;
+        this.Id = villeId;
         this.villeNom = villeNom;
         this.villeLong = villeLong;
         this.villeLarg = villeLarg;
@@ -259,11 +261,13 @@ public class Ville {
         this.rtbPMax = rtbPMax;
     }
 
-    public Integer getVilleId() {
-        return villeId;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setVilleId(Integer villeId) {
-        this.villeId = villeId;
+    public void setId(Integer villeId) {
+        this.Id = villeId;
     }
+
+
 }

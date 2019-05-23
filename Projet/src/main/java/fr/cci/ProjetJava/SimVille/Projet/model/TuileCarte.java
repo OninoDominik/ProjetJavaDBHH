@@ -1,22 +1,26 @@
 package fr.cci.ProjetJava.SimVille.Projet.model;
 
+import fr.cci.ProjetJava.SimVille.Projet.model.repository.TerrainRepository;
+
 import javax.persistence.*;
 
 @Entity
 public class TuileCarte {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer tuileCarteId;
+    private Integer Id;
     private Integer tuileCarteposition;
 
     public TuileCarte(Integer tuileCarteposition, Terrain terrain, Ville ville) {
+        super();
         this.tuileCarteposition = tuileCarteposition;
         this.terrain = terrain;
         this.ville = ville;
     }
 
     public TuileCarte(Integer tuileCarteId, Integer tuileCarteposition, Terrain terrain, Ville ville) {
-        this.tuileCarteId = tuileCarteId;
+        super();
+        this.Id = tuileCarteId;
         this.tuileCarteposition = tuileCarteposition;
         this.terrain = terrain;
         this.ville = ville;
@@ -31,12 +35,12 @@ public class TuileCarte {
     @ManyToOne
     private Ville ville;
 
-    public Integer getTuileCarteId() {
-        return tuileCarteId;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setTuileCarteId(Integer tuileCarteId) {
-        tuileCarteId = tuileCarteId;
+    public void setId(Integer tuileCarteId) {
+        Id = tuileCarteId;
     }
 
     public Integer getTuileCarteposition() {
@@ -44,7 +48,7 @@ public class TuileCarte {
     }
 
     public void setTuileCarteposition(Integer tuileCarteposition) {
-        tuileCarteposition = tuileCarteposition;
+        this.tuileCarteposition = tuileCarteposition;
     }
 
     public Terrain getTerrain() {
