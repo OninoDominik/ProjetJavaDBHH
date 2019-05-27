@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -52,12 +53,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
   </button>
-   <a class="navbar-brand" href="accueil.html" style="color:#e67300;">SIMVILLE</a>
+   <a class="navbar-brand" href="/simville/accueil" style="color:#e67300;">SIMVILLE
+       <i class="fas fa-home og" style="font-size:25px;color:#FF8000"></i></a>
 </div>
   <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="accueil.html" class="">Accueil</a></li>
-          <li><a href="/ville/all" class="">Afficher Ville</a></li>
+          <li class="active"><a href="/simville/accueil" class="">Accueil</a></li>
+          <li><a href="/ville/all" class="">Choisir une ville</a></li>
         </ul>
   </div>
 </div>
@@ -75,9 +77,10 @@
     <div class="row mtb">
       <h3 class="centered">MENU EXCLUSIF</h3>
       <hr class="aligncenter mb">
-      <p class="text-p centered">Vous pouvez cliquer sur chaque menu pour afficher plus d'informations.</p>
+        <p class="text-p centered">Vous pouvez cliquer sur chaque menu pour afficher plus d'informations.</p> </div><br>
       <div class="col-md-10 col-md-offset-1">
         <div id="mi-slider" class="mi-slider">
+            <span th:if="${page == 'F'}">
           <ul>
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/COM_color.png" alt="img05"><h4>Commerce</h4></a></li>
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/EGL_color.png" alt="img06"><h4>Eglise</h4></a></li>
@@ -85,21 +88,21 @@
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/ECL_color.png" alt="img08"><h4>Ecole</h4></a></li>
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/POL_color.png" alt="img08"><h4>Police</h4></a></li>
           </ul>
-    
+</span>
+            <span th:th:unless="${page == 'F'}">
           <ul>
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/RTE_color.png" alt="img05"><h4>Route</h4></a></li>
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/RTB_color.png" alt="img06"><h4>Arrêt de bus</h4></a></li>
-          </ul>
-           <ul>
+
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/RIV_color.png" alt="img05"><h4>Rivière</h4></a></li>
             <li><a data-toggle="modal" data-target="#myModal"><img src="/media/tiles/FOR_color.png" alt="img06"><h4>Eglise</h4></a></li>
-
           </ul>
-          
+</span>
+
           <nav>
-            <a href="">Batiment</a>
-            <a href="">Route</a>
-            <a href="">Nature</a>
+            <a href="?page=F">Batiment</a>
+            <a href="?page=2">Route et nature</a>
+
           </nav>
         </div>
       </div>
@@ -111,48 +114,13 @@
 
   <!-- MODAL DEMO FOR A MENU ITEM -->
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
-          <h5 class="modal-title" id="myModalLabel"></h5>
-        </div>
-        <div class="modal-body">
-          <img class="img-responsive aligncenter" src="ville/ville.png" alt="">
-          <h4>Lorem Ipsum is that</h4>
-          <p class="text-p">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-          <p class="text-p">The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-          <h5>Prix..........$129.000</h5>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-    <!--/modal-dialog -->
-  </div>
+
   <!-- /modal -->
 
 
 
   <!-- ********** FOOTER SECTION ********** -->
-  <div id="f">
-    <div class="container">
-      <div class="row">
-        <h3 class="centered">SOUSCRIVEZ AUX NEWSLETTER</h3>
-        <hr class="aligncenter mb">
-        <div class="col-md-6 col-md-offset-3 centered">
-          <form role="form" action="register.php" method="post" enctype="plain">
-            <input type="email" name="email" class="subscribe-input" placeholder="Entrer votre mail ici..." required>
-            <button class='btn btn-lg btn-orange subscribe-submit' type="submit">Subscrire</button>
-          </form>
-        </div>
-      </div>
-      <!--/row -->
-    </div>
-    <!--/container -->
-  </div>
+
 
   <div id="contact">
     <div class="container">
@@ -222,7 +190,7 @@
       
         	<div class="col-md-6">
           <div class="form-group">
-            <label for="contact-subject">Puissance max forêt</label>
+            <label for="forPMax">Puissance max forêt</label>
             <input type="number" name="forPMax" min="1" class="form-control" id="forPMax" placeholder="Subject" data-rule="" data-msg="Entrer la puissance max forêt" required>
             <div class="validate"></div>
           </div>
@@ -298,11 +266,9 @@
                    <div class="col-lg-2 col-md-10 col-sm-12">
                           <h5>Information</h5>
                           <ul class="row">
-                        <a class="col-lg-12 col-sm-12 col-xs-3"  href="accueil.html">Accueil</a>
-                       <a class="col-lg-12 col-sm-12 col-xs-3" href="carte.html">Carte</a>
-                       <a class="col-lg-12 col-sm-12 col-xs-3" href="afficheV.html">Afficher Ville</a>
-                       <a class="col-lg-12 col-sm-12 col-xs-3" href="modifV.html">Modifier Ville</a>
-                       <a class="col-lg-12 col-sm-12 col-xs-3" href="modifT.html">Modifier Tuille</a>
+                        <a class="col-lg-12 col-sm-12 col-xs-3"  href="/simville/accueil">Accueil</a>
+                       <a class="col-lg-12 col-sm-12 col-xs-3" href="/ville/all"> Ville</a>
+
                      </ul>
                    </div>
 

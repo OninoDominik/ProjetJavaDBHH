@@ -70,7 +70,6 @@ public class VilleController {
         n.setForDMax(forDMax);
         n.setForPMax(forPMax);
         villeRepository.save(n);
-        System.out.println("find by id va etre lancé");
         setCarte(n);
         HttpHeaders headers = new HttpHeaders();
             String redirection= "/simville/accueil";
@@ -88,6 +87,14 @@ public class VilleController {
     public String AfficheCarte(@RequestParam int villeId, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
 
         Ville tempo= villeRepository.findById(villeId);
+        if (tempo==null)
+        {
+            String code="400";
+            String message="Bad request : L'id de l'objet Ville n'existe pas";
+            model.addAttribute("code", code);
+            model.addAttribute("message", message);
+            return "error";
+        }
         Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
 
         int taille= (tempo.getVilleLarg()*100);
@@ -102,14 +109,24 @@ public class VilleController {
     public String AfficheCarteId(@PathVariable int id, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
 
         Ville tempo= villeRepository.findById(id);
-        Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
+        if (tempo==null)
+        {
+            String code="400";
+            String message="Bad request : L'id de l'objet Ville n'existe pas";
+            model.addAttribute("code", code);
+            model.addAttribute("message", message);
+            return "error";
+        }
+        else {
+            Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
 
-        int taille= (tempo.getVilleLarg()*100);
-        String tailletoString= Integer.toString(taille);
-        tailletoString+="px";
-        model.addAttribute("taille",tailletoString );
-        model.addAttribute("produits", TuileCarte);
-        return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
+            int taille = (tempo.getVilleLarg() * 100);
+            String tailletoString = Integer.toString(taille);
+            tailletoString += "px";
+            model.addAttribute("taille", tailletoString);
+            model.addAttribute("produits", TuileCarte);
+            return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
+        }
     }
     public void setCarte(Ville Ville) {
         System.out.println(terrainRepository.findById(1));
