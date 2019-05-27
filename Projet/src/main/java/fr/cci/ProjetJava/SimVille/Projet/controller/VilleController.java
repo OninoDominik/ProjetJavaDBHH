@@ -4,6 +4,7 @@ import fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TerrainRepository;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TuileCarteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +27,8 @@ public class VilleController {
 
 
     @PostMapping(path = "/add")
-    public @ResponseBody
-    String addNewVille(
+    @ResponseBody
+    public void addNewVille(
             @RequestParam String villeNom,
             @RequestParam Integer villeLong,
             @RequestParam Integer villeLarg,
@@ -46,7 +47,8 @@ public class VilleController {
             @RequestParam float polDMax,
             @RequestParam float polPMax,
             @RequestParam float rtbDMax,
-            @RequestParam float rtbPMax) {
+            @RequestParam float rtbPMax,
+            HttpServletResponse httpServletResponse) {
         Ville n = new Ville();
         n.setVilleNom(villeNom);
         n.setVilleLong(villeLong);
@@ -70,19 +72,22 @@ public class VilleController {
         villeRepository.save(n);
         System.out.println("find by id va etre lancé");
         setCarte(n);
-        return "Saved and map created";
+        HttpHeaders headers = new HttpHeaders();
+            String redirection= "/simville/accueil";
+        httpServletResponse.setHeader("Location", redirection);
+        httpServletResponse.setStatus(302);
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<Ville> getAllUsers() {
-        return villeRepository.findAll();
+    public String getAllUsers(  Model model) {
+        model.addAttribute("listville",villeRepository.findAll() );
+        return "afficheV";
 
     }
-    @GetMapping("/affiche/{toto}")
-    public String AfficheCarte(@PathVariable int toto, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
+    @PostMapping("/affiche")
+    public String AfficheCarte(@RequestParam int villeId, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
 
-        Ville tempo= villeRepository.findById(toto);
+        Ville tempo= villeRepository.findById(villeId);
         Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
 
         int taille= (tempo.getVilleLarg()*100);
@@ -93,6 +98,19 @@ public class VilleController {
         return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
     }
 
+    @GetMapping("/affiche/{id}")
+    public String AfficheCarteId(@PathVariable int id, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
+
+        Ville tempo= villeRepository.findById(id);
+        Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
+
+        int taille= (tempo.getVilleLarg()*100);
+        String tailletoString= Integer.toString(taille);
+        tailletoString+="px";
+        model.addAttribute("taille",tailletoString );
+        model.addAttribute("produits", TuileCarte);
+        return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
+    }
     public void setCarte(Ville Ville) {
         System.out.println(terrainRepository.findById(1));
         Terrain terrainForet= (Terrain)terrainRepository.findById(1);

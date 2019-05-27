@@ -63,7 +63,7 @@ public class TuileCarteController {
         TuileCarte tuileCarte = tuileCarteRepository.findById(id);
         if (tuileCarte!=null) {
             model.addAttribute("tuileCarte", tuileCarte);
-            return "TuileCarteDetail";
+            return "modifT";
         } else
         {
             String code="400";
@@ -83,8 +83,8 @@ public class TuileCarteController {
     @PostMapping(path = "/updateterrain")
     @ResponseBody
     public void updateTuileCarte(@RequestParam int IdTerrain,
-                                     @RequestParam int IdTuileCarte, HttpServletResponse httpServletResponse) {
-        TuileCarte tuileCarte = tuileCarteRepository.findById(IdTuileCarte);
+                                     @RequestParam int terrainNom1, HttpServletResponse httpServletResponse) {
+        TuileCarte tuileCarte = tuileCarteRepository.findById(terrainNom1);
         Terrain terrain = terrainRepository.findById(IdTerrain);
         if (terrain == null) {
             HttpHeaders headers = new HttpHeaders();
