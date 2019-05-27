@@ -1,16 +1,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mcommerce</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+  <!-- Favicons -->
+  <link href="/img/icologo.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Libre+Baskerville:400italic" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <!-- Bootstrap CSS File -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/lib/catslider/catslider.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 
 
-<div class="container" style="">
+  <div class="navbar navbar-default navbar-fixed-top" style="background-color: #000000 !important;" role="navigation">
+     <div class="container">
+     <div class="navbar-header">
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+    <div>
+      <a class="navbar-brand" href="/simville/accueil" style="color:#FF8000;">SIMVILLE
+      <i class="fas fa-home og" style="font-size:25px;color:#FF8000"></i></a>
+    </div>
 
-    <h1>Application villesim</h1>
+  </div>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="/simville/accueil" class="">Accueil</a></li>
+            <li><a href="/ville/all" class="">Afficher Ville</a></li>
+          </ul>
+    </div>
+  </div>
+  </div>
+
+<div class="container" style="margin-bottom: 70px">
+
+    <h1 style="text-align: center; margin-top: 80px; margin-bottom: 70px">Application villesim</h1>
 
 
     <div th:style="|width: ${taille}|">
@@ -24,7 +62,151 @@
 </div>
 
 
-<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<div id="copyrights">
+   <div class="container">
+ 
+     <div class="credits">
+       <div class="row">
+                   <div class="col-lg-2 col-md-10 col-sm-12">
+                          <h5>Information</h5>
+                          <ul class="row">
+                       <a class="col-lg-12 col-sm-12 col-xs-3"  href="accueil.html">Accueil</a>
+                       <a class="col-lg-12 col-sm-12 col-xs-3" href="carte.html">Carte</a>
+                       <a class="col-lg-12 col-sm-12 col-xs-3" href="afficheV.html">Afficher Ville</a>
+                       <a class="col-lg-12 col-sm-12 col-xs-3" href="modifV.html">Modifier Ville</a>
+                       <a class="col-lg-12 col-sm-12 col-xs-3" href="modifT.html">Modifier Tuille</a>
+                     </ul>
+                   </div>
+
+                   <div class="col-lg-4 col-md-8 col-sm-12">
+                           <h5>Newsletter</h5><br>
+                           <p>Get notified about the latest properties in our marketplace.</p>
+                           <form class="form-inline" role="form">
+                                   <input type="text" placeholder="Enter Your email address" class="form-control">&nbsp;
+                                   <input type="submit" name="submit" value="SUBSCRIB" class="btn btn-danger">
+                           </form>
+                   </div>
+                         <div class="col-lg-3 col-md-9 col-sm-12">
+                           <h5>Contact us</h5><br>
+                           <p><span class="fa fa-map-marker-alt"></span>&nbsp; 11 rue de example</p>
+                           <p><span class="far fa-envelope"></span>&nbsp; hello@example.com</p>
+                           <p><span class="fa fa-phone"></span>&nbsp; 07 66 53 56 66</p>
+                         </div>
+
+                         <div class="col-lg-3 col-md-9 col-sm-12">
+                           <h5 class="text-white">Follow us</h5><br>
+                           <ul class="social-network social-circle">
+                             <li><a href="#" class="icoFacebook" title="Facebook"><span class="fab fa-facebook-f"></span></a></li>
+                             <li><a href="#" class="icoTwitter" title="Twitter"><span class="fab fa-twitter"></span></a></li>
+                             <li><a href="#" class="icoYoutube" title="Youtube"><span class="fab fa-youtube"></span></a></li>
+                             <li><a href="#" class="icoEnvelope" title="Envelope"><span class="fa fa-envelope"></span></a></li>
+                           </ul>
+                         </div>
+               </div>
+     </div>
+   </div>
+ </div>
+
+ <style>
+
+ /*FOOTER*/
+ /* footer social icons */
+
+ ul.social-network {
+ list-style: none;
+ display: inline;
+ margin-left: 0 !important;
+ padding: 0;
+ }
+
+ ul.social-network li {
+ display: inline;
+ margin: 0 3px;
+ }
+
+
+ /* footer social icons */
+
+ .social-network a.icoFacebook:hover {
+ background-color: #3B5998;
+ }
+
+ .social-network a.icoTwitter:hover {
+ background-color: #007bb7;
+ }
+
+ .social-network a.icoYoutube:hover {
+ background-color: #FF0000;
+ }
+
+ .social-network a.icoEnvelope:hover {
+ background-color: #D35400;
+ }
+
+ .social-network a.icoFacebook:hover span,
+ .social-network a.icoTwitter:hover span,
+ .social-network a.icoYoutube:hover span,
+ .social-network a.icoEnvelope:hover span {
+ color: #fff;
+ }
+
+ .social-network a.socialIcon:hover,
+ .socialHoverClass {
+ color: #44BCDD;
+ }
+
+ .social-circle li a {
+ display: inline-block;
+ position: relative;
+ margin: 0 auto 0 auto;
+ -moz-border-radius: 50%;
+ -webkit-border-radius: 50%;
+ border-radius: 50%;
+ text-align: center;
+ width: 45px;
+ height: 45px;
+ font-size: 30px;
+ }
+
+ .social-circle li span {
+ margin: 0;
+ padding: 7px;
+ line-height: 30px;
+ text-align: center;
+ }
+
+ .social-circle li a:hover span,
+ .triggeredHover {
+ -moz-transform: rotate(360deg);
+ -webkit-transform: rotate(360deg);
+ -ms--transform: rotate(360deg);
+ transform: rotate(360deg);
+ -webkit-transition: all 0.5s;
+ -moz-transition: all 0.5s;
+ -o-transition: all 0.5s;
+ -ms-transition: all 0.5s;
+ transition: all 0.5s;
+ }
+
+ .social-circle span {
+ color: #595959;
+ -webkit-transition: all 0.8s;
+ -moz-transition: all 0.8s;
+ -o-transition: all 0.8s;
+ -ms-transition: all 0.8s;
+ transition: all 0.8s;
+ }
+
+ .social-network a {
+ background-color: #F9F9F9;
+ }
+
+ </style>
+
 
 </body>
 </html>
+
+
+
+

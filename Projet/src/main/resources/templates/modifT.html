@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SIMVILLE</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Libre+Baskerville:400italic"
+          rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/lib/catslider/catslider.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/img/icologo.png" rel="icon">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Libre+Baskerville:400italic"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- =======================================================
+      Template Name: FoodLanding
+      Template URL: https://templatemag.com/foodlanding-bootstrap-landing-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
+</head>
+
+<body data-spy="scroll" data-offset="58" data-target="#navigation">
+
+<!-- navigateur -->
+
+
+<div class="navbar navbar-default navbar-fixed-top" style="background-color: #000000 !important;" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="accueil.html" style="color:#e67300;">SIMVILLE</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/simville/accueil" class="">Accueil</a></li>
+
+                <li><a href="/ville/all" class="">Afficher Ville</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" style="margin-top: 80px; margin-bottom: 80px">
+
+        <div class="col-md-9" style="margin-top: 120px">
+            <h4 style="text-align: center;"><u style="color: #e67300">Selectionner une </u>tuile pour créer votre
+                terrain</h4><br><br/>
+            <form class="well form-horizontal" action="/tuilecarte/updateterrain" method="POST">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td colspan="1">
+
+                            <fieldset>
+                                <div class="form-group">
+
+                                    <div class="col-md-12 inputGroupContainer">
+                                        <p id="terrainType1"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-md-12 inputGroupContainer">
+                                        <p id="terrainNom1"></p>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row" style=" align-items: center; text-align: center">
+                    <button class="btn btn-lg btn-orange subscribe-submit" type="submit" value="valider">Changer
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3 text-center" style="border: 2px solid orange; ">
+            <h3 class="h4 col-xs-12 text-center" style="margin-bottom: 30px">Modifier votre tuile par :</h3>
+
+            <div class="row text-center" style="margin-bottom: 20px; margin-top: 30px; margin-left: 1px">
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item" style="">
+                    <div class="card h-100 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_FOR (); return false"
+                                         src="/media/tiles/FOR_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-3 col-sm-6 " style=";">
+                    <div class="card h-100 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_RIV (); return false"
+                                         src="/media/tiles/RIV_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center" style="margin-bottom: 20px; margin-left: 1px">
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item" style=";">
+                    <div class="card h-40 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_COM (); return false"
+                                         src="/media/tiles/COM_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item" style="">
+                    <div class="card h-40 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_ECL(); return false"
+                                         src="/media/tiles/ECL_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px; margin-left: 1px">
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item">
+                    <div class="card h-100 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_EGL (); return false"
+                                         src="/media/tiles/EGL_color.png" alt=""></a>
+                        <div class="overlay">
+
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item" style="">
+                    <div class="card h-100 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_POL (); return false"
+                                         src="/media/tiles/POL_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px; margin-left: 1px">
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item">
+                    <div class="card h-40 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_RES (); return false"
+                                         src="/media/tiles/RES_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item" style="">
+                    <div class="card h-40 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_RTB (); return false"
+                                         src="/media/tiles/RTB_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px; margin-left: 1px">
+                <div class="col-lg-6 col-md-3 col-sm-6 portfolio-item" style="">
+                    <div class="card h-40 hovereffect">
+                        <a href="#"><img class="card-img-top" onclick="FUNC_RTE (); return false"
+                                         src="/media/tiles/RTE_color.png" alt=""></a>
+                        <div class="overlay">
+                            <a class="info" href="#">link here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer -->
+<div id="copyrights">
+    <div class="container">
+        <!-- <p>
+          &copy; Copyrights <strong>FoodLanding</strong>. All Rights Reserved
+        </p> -->
+        <div class="credits">
+            <!--
+              You are NOT allowed to delete the credit link to TemplateMag with free version.
+              You can delete the credit link only if you bought the pro version.
+              Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/foodlanding-bootstrap-landing-template/
+              Licensing information: https://templatemag.com/license/
+            -->
+            <!-- Created with FoodLanding template by <a href="https://templatemag.com/">TemplateMag</a> -->
+            <div class="row">
+                <div class="col-lg-2 col-md-10 col-sm-12">
+                    <h5>Information</h5>
+                    <ul class="row">
+                        <a class="col-lg-12 col-sm-12 col-xs-3" href="/simville/accueil">Accueil</a>
+                        <a class="col-lg-12 col-sm-12 col-xs-3" href="/ville/all">Choix Ville</a>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-8 col-sm-12">
+                    <h5>Newsletter</h5><br>
+                    <p>Get notified about the latest properties in our marketplace.</p>
+                    <form class="form-inline" role="form">
+                        <input type="text" placeholder="Enter Your email address" class="form-control">&nbsp;
+                        <input type="submit" name="submit" value="SUBSCRIB" class="btn btn-danger">
+                    </form>
+                </div>
+                <div class="col-lg-3 col-md-9 col-sm-12">
+                    <h5>Contact us</h5><br>
+                    <p><span class="fa fa-map-marker-alt"></span>&nbsp; 11 rue de example</p>
+                    <p><span class="far fa-envelope"></span>&nbsp; hello@example.com</p>
+                    <p><span class="fa fa-phone"></span>&nbsp; 07 66 53 56 66</p>
+                </div>
+
+                <div class="col-lg-3 col-md-9 col-sm-12">
+                    <h5 class="text-white">Follow us</h5><br>
+                    <ul class="social-network social-circle">
+                        <li><a href="#" class="icoFacebook" title="Facebook"><span class="fab fa-facebook-f"></span></a>
+                        </li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#" class="icoYoutube" title="Youtube"><span class="fab fa-youtube"></span></a></li>
+                        <li><a href="#" class="icoEnvelope" title="Envelope"><span class="fa fa-envelope"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var message = /*[[${tuileCarte.Id}]]*/ 'default';
+
+
+    function FUNC_FOR ()
+    {
+
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="1" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+
+    }
+    function FUNC_RIV ()
+    {
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="2" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_COM ()
+    {
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="3" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_ECL ()
+    {
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="4" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_EGL ()
+    {
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="5" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_POL ()
+    {
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="6" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_RES ()
+    {
+      var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="7" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_RTB ()
+    {  var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="8" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    function FUNC_RTE ()
+    {  var x1= document.getElementById('terrainType1').innerHTML = '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="IdTerrain" id="IdTerrain" class="subscribe-input" placeholder="Entrer Id Terrain..." value="9" required></div>';
+      var x2= document.getElementById('terrainNom1').innerHTML =  '<div class="input-group"><span class="input-group-addon"><i class="fas fa-home" style="font-size:20px;color:#FF8000"></i></span><input type="number" min="1" name="terrainNom1" id="terrainNom1" class="subscribe-input" placeholder="Entrer Id Terrain..." value="'+message+'" required></div>'
+    }
+    /*]]>*/
+
+</script>
+
+<!-- JavaScript Libraries -->
+<style>
+.hovereffect {
+  width: auto;
+  height: auto;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  width: auto;
+  height: auto;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.hovereffect:hover .overlay {
+  background-color: rgba(170,170,170,0.4);
+}
+
+.hovereffect h2, .hovereffect img {
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.hovereffect:hover img {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hovereffect a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid #fff;
+  margin: 50px 0 0 0;
+  background-color: transparent;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  font-weight: normal;
+  height: 85%;
+  width: 85%;
+  position: absolute;
+  top: -20%;
+  left: 8%;
+  padding: 70px;
+}
+
+.hovereffect:hover a.info {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  background-color: rgba(0,0,0,0.4);
+}
+
+</style>
+
+<script>
+function myFunction() {
+  var x = document.createElement("INPUT");
+  x.setAttribute("type", "text");
+  x.setAttribute("value", "haider");
+  
+  document.body.appendChild(x);
+}
+
+</script>
+<style>
+
+ /*FOOTER*/
+ /* footer social icons */
+
+ ul.social-network {
+ list-style: none;
+ display: inline;
+ margin-left: 0 !important;
+ padding: 0;
+ }
+
+ ul.social-network li {
+ display: inline;
+ margin: 0 3px;
+ }
+
+
+ /* footer social icons */
+
+ .social-network a.icoFacebook:hover {
+ background-color: #3B5998;
+ }
+
+ .social-network a.icoTwitter:hover {
+ background-color: #007bb7;
+ }
+
+ .social-network a.icoYoutube:hover {
+ background-color: #FF0000;
+ }
+
+ .social-network a.icoEnvelope:hover {
+ background-color: #D35400;
+ }
+
+ .social-network a.icoFacebook:hover span,
+ .social-network a.icoTwitter:hover span,
+ .social-network a.icoYoutube:hover span,
+ .social-network a.icoEnvelope:hover span {
+ color: #fff;
+ }
+
+ .social-network a.socialIcon:hover,
+ .socialHoverClass {
+ color: #44BCDD;
+ }
+
+ .social-circle li a {
+ display: inline-block;
+ position: relative;
+ margin: 0 auto 0 auto;
+ -moz-border-radius: 50%;
+ -webkit-border-radius: 50%;
+ border-radius: 50%;
+ text-align: center;
+ width: 45px;
+ height: 45px;
+ font-size: 30px;
+ }
+
+ .social-circle li span {
+ margin: 0;
+ padding: 7px;
+ line-height: 30px;
+ text-align: center;
+ }
+
+ .social-circle li a:hover span,
+ .triggeredHover {
+ -moz-transform: rotate(360deg);
+ -webkit-transform: rotate(360deg);
+ -ms--transform: rotate(360deg);
+ transform: rotate(360deg);
+ -webkit-transition: all 0.5s;
+ -moz-transition: all 0.5s;
+ -o-transition: all 0.5s;
+ -ms-transition: all 0.5s;
+ transition: all 0.5s;
+ }
+
+ .social-circle span {
+ color: #595959;
+ -webkit-transition: all 0.8s;
+ -moz-transition: all 0.8s;
+ -o-transition: all 0.8s;
+ -ms-transition: all 0.8s;
+ transition: all 0.8s;
+ }
+
+ .social-network a {
+ background-color: #F9F9F9;
+ }
+
+
+</style>
+
+
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/php-mail-form/validate.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/modernizr/modernizr.custom.js"></script>
+<script src="lib/stellar/stellar.min.js"></script>
+<script src="lib/catslider/catslider.js"></script>
+
+<!-- Template Main Javascript File -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
+
+
+ 
+
+ 
