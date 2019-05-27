@@ -1,0 +1,169 @@
+ALGORITHME - CALCUL CASE INDIVIDUELLE:
+
+
+NOTATIONS:
+
+	Xc,Yc 	- coordonnées de la case "en cours"
+	x,y 	- coordonnées de la case "considérée"	
+
+	Pmax	- influence max
+	Dmax	- distance max
+	D		- distance tile-to-tile
+
+	Xmib 	- x min in bounds
+	Xmab 	- x max in bounds
+	Ymib 	- y min in bounds
+	Ymab 	- y max in bounds
+_______________________________________________________________________
+
+GET DMAX VILLE:
+		-------------------------------------------------
+		public float DmaxMax(){
+			float Dmax=this.rivDmax;
+			if(Dmax<this.forDmax){
+				Dmax=this.forDmax;
+			}
+			if(Dmax<this.forDmax){
+				Dmax=this.forDmax;
+			}
+			if(Dmax<this.eclmax){
+				Dmax=this.eclDmax;
+			}
+			if(Dmax<this.eglDmax){
+				Dmax=this.eglDmax;
+			}
+			if(Dmax<this.comDmax){
+				Dmax=this.comDmax;
+			}
+			if(Dmax<this.polDmax){
+				Dmax=this.polDmax;
+			}
+			if(Dmax<this.polDmax){
+				Dmax=this.polDmax;
+			}
+			if(Dmax<this.polDmax){
+				Dmax=this.polDmax;
+			}
+			if(Dmax<this.rtbDmax){
+				Dmax=this.rtbDmax;
+			}
+			
+			return Dmax;		
+		}
+
+
+GET BOUNDS:
+		-------------------------------------------------
+			if(Xc-Dmax<0){
+				Xmib = 0;
+			}
+			else{
+				Xmib = (Xc - Dmax)%1;
+			}
+			
+			if(Xc+Dmax>Ville.getXmax()){
+				Xmab = Ville.getXmax();
+			}
+			else{
+				Xmab = (Xc + Dmax)%1;
+			}
+			
+			if(Yc-Dmax<0){
+				Ymib = 0;
+			}
+			else{
+				Ymib = (Yc - Dmax)%1;
+			}
+			
+			if(Yc+Dmax>Ville.getYmax()){
+				Ymab = Ville.getYmax();
+			}
+			else{
+				Ymab = (Yc + Dmax)%1;
+			}
+		-------------------------------------------------	
+
+METHODES POUR RECUPERER LES ATTRIBUTS PMAX ET DMAX D'UNE TUILE:  ***A REMPLIR***
+
+			public float getDMax(){
+			**
+				à compléter 
+			**			
+			}
+			
+			
+			public float getPMax(){
+			**
+				à compléter 
+			**			
+			}		
+		
+
+METHODE POUR VOIR SI UNE CASE INFLUENCE LA VALEUR DE LA CASE A EVALUER:
+
+			public float getImpact(int Xc, int Yc){
+				float D = Math.sqrt((x-Xc)²+(y-Yc)²);
+				float Dmax = this.getDMax();
+				
+				float P = 0.0;
+				
+				if(Dmax<D){
+					P = this.getPMax() * ((Dmax-D)/Dmax);
+				}
+				
+				return P;		
+			}	
+		
+
+CALCULATE VALUE:
+		-------------------------------------------------
+			
+			float V = 0.0;
+		
+			for(int x = Xmib; x<Xmab; x++){
+				for(int y = Ymib; y<Ymab; y++){
+					V += **tuile(x,y)**.getImpact(Xc,Yc);
+				}
+			}
+		-------------------------------------------------	 
+	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
