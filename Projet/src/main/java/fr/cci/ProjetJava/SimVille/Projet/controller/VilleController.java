@@ -72,7 +72,7 @@ public class VilleController {
         villeRepository.save(n);
         setCarte(n);
         HttpHeaders headers = new HttpHeaders();
-            String redirection= "/simville/accueil";
+            String redirection= "/ville/all";
         httpServletResponse.setHeader("Location", redirection);
         httpServletResponse.setStatus(302);
     }
