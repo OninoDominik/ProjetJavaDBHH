@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface TuileCarteRepository extends JpaRepository<TuileCarte, Integer> {
 
-    List<TuileCarte> findByVille(Ville ville);
+    List<TuileCarte> findByVilleOrderByTuileCarteposition(Ville ville);
     TuileCarte findById(int id);
 }
