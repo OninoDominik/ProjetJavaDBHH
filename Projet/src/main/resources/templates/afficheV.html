@@ -22,31 +22,32 @@
   <!-- Main Stylesheet File -->
   <link href="/css/style.css" rel="stylesheet">
 </head>
-<body>
+<body data-spy="scroll" data-offset="58" data-target="#navigation" >
+<!-- navigateur-->
 
 
-  <div class="navbar navbar-default navbar-fixed-top" style="background-color: #000000 !important;" role="navigation">
-     <div class="container">
-     <div class="navbar-header">
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-    <div>
-      <a class="navbar-brand" href="accueil.html" style="color:#FF8000;">SIMVILLE
-      <i class="fas fa-home og" style="font-size:25px;color:#FF8000"></i></a>
+<div class="navbar navbar-default navbar-fixed-top" style="background-color: #000000 !important;" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/simville/accueil" style="color:#e67300;">SIMVILLE
+                <i class="fas fa-home og" style="font-size:25px;color:#FF8000"></i></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/simville/accueil" class="">Accueil</a></li>
+                <li><a href="/ville/all" class="">Choisir une ville</a></li>
+            </ul>
+        </div>
     </div>
-
-  </div>
-    <div class="collapse navbar-collapse" id="navbar">
-        <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="accueil.html" class="">Accueil</a></li>
-           
-            <li><a href="/ville/all" class="">Afficher Ville</a></li>
-
-          </ul>
-    </div>
-  </div>
-  </div>
+</div>
 
   <div id="h">
     <div class="container">
@@ -59,7 +60,7 @@
             <form role="form" action="/ville/affiche" method="post"  id="ville">
 
               <select name="villeId" style="width: 250px; height: 43px;">
-              <option  selected="selected">Choississez votre ville...</option>
+
                   <div th:each="product : ${listville}"  >
                       <option th:value="@{|${product.id}|}" ><h1 th:inline="text" >
                            [[${product.villeNom}]]

@@ -18,9 +18,17 @@ import java.util.List;
 @RequestMapping(path="/simville")
 public class AcceuilControler {
 
-    @GetMapping(path = "/accueil")
-    public String afficheAcceuil(Model model) {
 
-        return "accueil";
+    @RequestMapping("/accueil")
+    public  String afficheAcceuil(@RequestParam(required = false)  String page, Model model) {
+        if (page!=null || page=="2#"){
+            model.addAttribute("page", page);
+            return "accueil";
+        }else {
+            page="F";
+            model.addAttribute("page", page);
+            return "accueil";
+        }
+
     }
 }
