@@ -1,34 +1,376 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Mcommerce</title>
+  <meta charset="utf-8">
+  <title>SIMVILLE</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Libre+Baskerville:400italic" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/lib/catslider/catslider.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Template Name: FoodLanding
+    Template URL: https://templatemag.com/foodlanding-bootstrap-landing-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
 </head>
-<body>
+
+<body data-spy="scroll" data-offset="58" data-target="#navigation" >
+<!-- navigateur-->
 
 
-<div class="container" style="overflow-x: scroll">
-
-    <h1>Application villesim</h1>
-
-
-
-
-
-    <div style="width: 100000px ">
-        <div th:each="product : ${produits}"  style="float: left; width: 100px ">
-            <a th:href="@{|/terrains-detail/${product.terrainId}|}" >
-                <img th:src="@{${product.terrainImgUrl}}"  class="card-img-top" />
-            </a>
-        </div>
-    </div>
-
+<div class="navbar navbar-default navbar-fixed-top" style="background-color: #000000 !important;" role="navigation">
+   <div class="container">
+   <div class="navbar-header">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+  </button>
+   <a class="navbar-brand" href="accueil.html" style="color:#e67300;">SIMVILLE</a>
+</div>
+  <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="accueil.html" class="">Accueil</a></li>
+          <li><a href="carte.html" class="">Carte</a></li>
+          <li><a href="affiche.html" class="">Afficher Ville</a></li>
+          <li><a href="modifV.html" class="nav-link">Modifier Ville</a></li>
+          <li><a href="modifT.html" class="">Modifier Tuile</a></li>
+        </ul>
+  </div>
+</div>
 </div>
 
+  <!-- ********** HEADER SECTION ********** -->
+  <div id="h">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 welcome">
+          <h1>BIENVENUE<br/>VOUS AVEZ DE QUESTIONS?</h1>
+          <hr class="aligncenter">
+          <p>Choississez votre ville<br/>Vous pouvez aussi <a href="#contact" class="smoothscroll">Créer</a> votre propre ville</p>
+          <div class="col-md-10 col-md-offset-1 centered mt">
+            <form role="form" action="register.php" method="post" enctype="plain">
 
-<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+            	<select name="Choississez votre ville..." style="width: 250px; height: 43px;">
+            	<option value="choix0" selected="selected">Choississez votre ville...</option>
+			    <option value="choix1">Strasbourg</option>
+			    <option value="choix2" >Paris</option>  <!--choix 2 selectionner par defaut-->
+			    <option value="choix3">Lyon</option>
+			    <option value="choix4">Toulouse</option>
+				</select>
+             
+              <button class='btn btn-lg btn-orange subscribe-submit' type="submit">Valider</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/row -->
+    </div>
+    <!-- /.container -->
+  </div>
+  <!--/ H -->
+
+  <!-- ********** WHITE SECTION ********** -->
+  <div class="container">
+    <div class="row mtb centered">
+      <h3>EXPERTISER VOTRE BIEN CHEZ NOUS.</h3>
+      <hr class="aligncenter mb">
+
+      <div class="col-md-3">
+        <i class="ion-ios-home og"></i>
+        <h5>MAISON</h5>
+        <p class="text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      </div>
+      <!--/col-md-3 -->
+      <div class="col-md-3">
+        <i class="ion-ios-location og"></i>
+        <h5>LOCATION</h5>
+        <p class="text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      </div>
+      <!--/col-md-3 -->
+      <div class="col-md-3">
+        <i class="ion-ios-person og"></i>
+        <h5>CONTACT</h5>
+        <p class="text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      </div>
+      <!--/col-md-3 -->
+      <div class="col-md-3">
+        <i class="ion-ios-cart og"></i>
+        <h5>NOUS LIVRONS</h5>
+        <p class="text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      </div>
+      <!--/col-md-3 -->
+
+    </div>
+    <!--/row -->
+  </div>
+  <!--/container -->
+
+
+
+  <!-- ********** PARALLAX SEPARATOR SECTION ********** -->
+  <div class="sep s02" data-stellar-background-ratio="0.5"></div>
+
+  <!-- ********** MENU SLIDER SECTION ********** -->
+  <div class="container" id="dishes">
+    <div class="row mtb">
+      <h3 class="centered">MENU EXCLUSIF</h3>
+      <hr class="aligncenter mb">
+      <p class="text-p centered">Vous pouvez cliquer sur chaque menu pour afficher plus d'informations.</p>
+      <div class="col-md-10 col-md-offset-1">
+        <div id="mi-slider" class="mi-slider">
+          <ul>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="/media/template/ville/strasbourg.jpg" alt="img01"><h4>Strasbourg</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="/ville/metz.jpg" alt="img02"><h4>Metz</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="/ville/paris.jpg" alt="img03"><h4>Paris</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="/ville/mulhouse.jpg" alt="img04"><h4>Mulhouse</h4></a></li>
+          </ul>
+          <ul>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="tiles/COM_1.png" alt="img05"><h4>Commerce</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="tiles/EGL_color.png" alt="img06"><h4>Eglise</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="tiles/COM_8.png" alt="img07"><h4>Commissariat</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="tiles/RES_color.png" alt="img08"><h4>Restaurant</h4></a></li>
+          </ul>
+          <ul>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="img/food/9.png" alt="img09"><h4>Banana Pudding</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="img/food/10.png" alt="img10"><h4>Black Bottom Pie</h4></a></li>
+            <li><a data-toggle="modal" data-target="#myModal"><img src="img/food/11.png" alt="img11"><h4>Black Forest</h4></a></li>
+          </ul>
+          <nav>
+            <a href="#">Ville</a>
+            <a href="#">Tuile</a>
+            <a href="#">Terrain</a>
+          </nav>
+        </div>
+      </div>
+      <!--/col-md-10 -->
+    </div>
+    <!--/row -->
+  </div>
+  <!--/container -->
+
+  <!-- MODAL DEMO FOR A MENU ITEM -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+          <h5 class="modal-title" id="myModalLabel"></h5>
+        </div>
+        <div class="modal-body">
+          <img class="img-responsive aligncenter" src="ville/ville.png" alt="">
+          <h4>Lorem Ipsum is that</h4>
+          <p class="text-p">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+          <p class="text-p">The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+          <h5>Prix..........$129.000</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+    <!--/modal-dialog -->
+  </div>
+  <!-- /modal -->
+
+
+
+  <!-- ********** FOOTER SECTION ********** -->
+  <div id="f">
+    <div class="container">
+      <div class="row">
+        <h3 class="centered">SOUSCRIVEZ AUX NEWSLETTER</h3>
+        <hr class="aligncenter mb">
+        <div class="col-md-6 col-md-offset-3 centered">
+          <form role="form" action="register.php" method="post" enctype="plain">
+            <input type="email" name="email" class="subscribe-input" placeholder="Entrer votre mail ici..." required>
+            <button class='btn btn-lg btn-orange subscribe-submit' type="submit">Subscrire</button>
+          </form>
+        </div>
+      </div>
+      <!--/row -->
+    </div>
+    <!--/container -->
+  </div>
+
+  <div id="contact">
+    <div class="container">
+      <!--<div class="col-md-12 col-md-offset-2" style="j">-->
+        <div class="row">
+        <h3 class="centered">CREATION VILLE</h3>
+        <hr class="aligncenter mb">
+
+        <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
+
+        
+
+        	<div class="col-md-6">
+          <div class="form-group">
+            <label for="villeNom">Nom Ville</label>
+            <input type="text" name="villeNom" class="form-control" id="villeNom" placeholder="Nom Ville"  >
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="villeLong">Longueur ville</label>
+            <input type="number" name="villeLong" class="form-control" id="villeLong" placeholder="Longueur" data-msg="Entrer la Longueur ville">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Largeur ville</label>
+            <input type="number" name="villeLarg" class="form-control" id="villeLarg" placeholder="Largeur" data-msg="Entrer la Largeur ville">
+            <div class="validate"></div>
+          </div>
+           <div class="form-group">
+            <label for="contact-name">Valeur min</label>
+            <input type="number" name="villeValeurImmoMin" class="form-control" id="villeValeurImmoMin" placeholder="Valeur minimum" data-msg="Entrer une valeur" >
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Valeur max</label>
+            <input type="number" name="villeValeurImmoMax" class="form-control" id="villeValeurImmoMax" placeholder="Valeur max" data-rule="" data-msg="Enter une valeur">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Distance max rivière</label>
+            <input type="number" name="rivDMax" class="form-control" id="rivDMax" placeholder="Distance max" data-rule="" data-msg="Entrer distance max rivière">
+            <div class="validate"></div>
+          </div>
+           <div class="form-group">
+            <label for="contact-name">Puissance max rivière</label>
+            <input type="number" name="rivPMax" class="form-control" id="rivPMax" placeholder="Puissance max" data-rule="" data-msg="Entrer puissance max rivière" >
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Distance max forêt</label>
+            <input type="number" name="forDMax" class="form-control" id="forDMax" placeholder="Distance max" data-rule="" data-msg="Entrer la distance max forêt">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Pas obligatoire</label>
+            <input type="text" name="null" class="form-control" id="" placeholder="Null" data-rule="" data-msg="Please, ne rien ecrire ici">
+            <div class="validate"></div>
+          </div>
+         </div>
+         
+       
+      
+        	<div class="col-md-6">
+          <div class="form-group">
+            <label for="contact-subject">Puissance max forêt</label>
+            <input type="number" name="forPMax" class="form-control" id="forPMax" placeholder="Subject" data-rule="" data-msg="Entrer la puissance max forêt">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-name">Distance max école</label>
+            <input type="number" name="eclDMax" class="form-control" id="eclDMax" placeholder="Distance max" data-rule="" data-msg="Entrer la distance max école" >
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">YPuissance max école</label>
+            <input type="number" name="eclPMax" class="form-control" id="eclPMax" placeholder="Puissance max" data-rule="" data-msg="Entrer la puissance max école">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Distance max eglise</label>
+            <input type="number" name="eglDMax" class="form-control" id="eglDMax" placeholder="Distance max" data-rule="" data-msg="Enter la distance max eglise">
+            <div class="validate"></div>
+          </div>
+           <div class="form-group">
+            <label for="contact-name">Puissance max eglise</label>
+            <input type="number" name="eglPMax" class="form-control" id="eglPMax" placeholder="Puissance max" data-rule="" data-msg="Entrer puissance max eglise" >
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-name">Distance max commerce</label>
+            <input type="number" name="comDMax" class="form-control" id="comDMax" placeholder="Distance max" data-rule="" data-msg="Entrer votre distance max commerce" >
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Puissance max commerce</label>
+            <input type="number" name="comPMax" class="form-control" id="comPMax" placeholder="Puissance max" data-rule="" data-msg="Entrer votre puissance max commerce">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Distance max police</label>
+            <input type="number" name="polDMax" class="form-control" id="polDMax" placeholder="Distance max" data-rule="" data-msg="Entrer la distance max commissariat">
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Puissance max  police</label>
+            <input type="number" name="polPMax" class="form-control" id="polPMax" placeholder="Puissance max" data-rule="" data-msg="Entrer la puissance max commissariat">
+            <div class="validate"></div>
+          </div>
+        </div>
+          <div class="loading"></div>
+          <div class="error-message"></div>
+          <div class="sent-message">Your message has been sent. Thank you!</div>
+          <div class="form-send">
+            <button type="submit" class="btn btn-large">Valider</button>
+          </div>
+   
+
+           </form> 
+      </div>
+    </div>
+ </div>
+
+<!-- footer -->
+ <div id="copyrights">
+    <div class="container">
+      <p>
+        &copy; Copyrights <strong>FoodLanding</strong>. All Rights Reserved
+      </p>
+      <div class="credits">
+        <!--
+          You are NOT allowed to delete the credit link to TemplateMag with free version.
+          You can delete the credit link only if you bought the pro version.
+          Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/foodlanding-bootstrap-landing-template/
+          Licensing information: https://templatemag.com/license/
+        -->
+        Created with FoodLanding template by <a href="https://templatemag.com/">TemplateMag</a>
+      </div>
+    </div>
+  </div>
+
+ <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/php-mail-form/validate.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/modernizr/modernizr.custom.js"></script>
+  <script src="lib/stellar/stellar.min.js"></script>
+  <script src="lib/catslider/catslider.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
 
 </body>
 </html>
+
+
+ 
+
+ 

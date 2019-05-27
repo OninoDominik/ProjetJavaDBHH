@@ -4,11 +4,15 @@ import fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TerrainRepository;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TuileCarteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import fr.cci.ProjetJava.SimVille.Projet.model.Ville;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(path="/ville")
@@ -79,7 +83,7 @@ public class VilleController {
     public String AfficheCarte(@PathVariable int toto, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
 
         Ville tempo= villeRepository.findById(toto);
-        Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVille(tempo);
+        Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
 
         int taille= (tempo.getVilleLarg()*100);
         String tailletoString= Integer.toString(taille);
@@ -96,5 +100,13 @@ public class VilleController {
             TuileCarte temp =new TuileCarte(i, terrainForet, Ville);
             tuileCarteRepository.save(temp);
         }
+    }
+    @GetMapping(path = "/error")
+    public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
+        int code = response.getStatus();
+        String message = HttpStatus.valueOf(code).getReasonPhrase();
+        model.addAttribute("code", code);
+        model.addAttribute("message", message);
+        return "error";
     }
 }

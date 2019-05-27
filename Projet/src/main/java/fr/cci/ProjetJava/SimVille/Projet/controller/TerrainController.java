@@ -5,10 +5,13 @@ import fr.cci.ProjetJava.SimVille.Projet.model.Ville;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.TerrainRepository;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -38,13 +41,12 @@ public class TerrainController {
         return terrainRepository.findAll();
     }
 
-    @RequestMapping("/affiche")
-    public String accueil(Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
-
-        Iterable<Terrain> terrains = terrainRepository.findAll();
-
-        model.addAttribute("produits", terrains);
-        System.out.println(System.getProperty("java.class.path"));
-        return "Accueil";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
+    @GetMapping(path = "/error")
+    public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
+        int code = response.getStatus();
+        String message = HttpStatus.valueOf(code).getReasonPhrase();
+        model.addAttribute("code", code);
+        model.addAttribute("message", message);
+        return "error";
     }
 }
