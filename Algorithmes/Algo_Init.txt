@@ -1,10 +1,21 @@
 
-Notations:
-Xmib (x min in bounds)
-Xmab (x max in bounds)
-Ymib (y min in bounds)
-Ymab (y max in bounds)
+ALGORITHME - CALCUL VALEURS VILLE
 
+
+NOTATIONS:
+
+	Xc,Yc 	- coordonnées de la case "en cours"
+	x,y 	- coordonnées de la case "considérée"	
+
+	Pmax	- influence max
+	Dmax	- distance max
+	D		- distance tile-to-tile
+
+	Xmib 	- x min in bounds
+	Xmab 	- x max in bounds
+	Ymib 	- y min in bounds
+	Ymab 	- y max in bounds
+_______________________________________________________________________
 
 
 GET BOUNDS:
@@ -41,10 +52,13 @@ GET BOUNDS:
 
 CHANGE VALUE (or not):
 		-------------------------------------------------
+		
+			float V = 0.0;
+		
 			for(int x = Xmib; x<Xmab; x++){
 				for(int y = Ymib; y<Ymab; y++){
 				
-					int D = Math.sqrt((x-Xc)²+(y-Yc)²)
+					float D = Math.sqrt((x-Xc)²+(y-Yc)²)
 					if( Dmax <= D ){
 						V = V + Pmax * ((Dmax-D)/Dmax);
 					}
