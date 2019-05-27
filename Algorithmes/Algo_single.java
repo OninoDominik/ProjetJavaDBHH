@@ -24,6 +24,7 @@ RESTE A DEFINIR:
 * 	redéfinir GetBounds pour le cas "individuel" 								Fait
 * 	définir "Tuile(x,y)" ainsi que le modèle de tableau utilisée pour le 		Fait
 	calcul
+* 	Remplacer les appels d'attributs BARBARES par leur GETTERS associés			A Faire
 */
 	
 //_______________________________________________________________________
@@ -153,6 +154,40 @@ RESTE A DEFINIR:
 				return 0.0;
 		}		
 	}		
+		
+		
+//METHODE PERMETTANT DE TESTER SI UNE TUILE EST EN CONTACT AVEC UNE ROUTE:
+
+	public boolean isNearRoad(int Xc, int Yc){
+		TuileCarteRepository tuileRep;
+		
+		if((this.getTuileCartePosition()-1>=0) 
+			&& tuileRep.findByTuileCarteposition(this.getTuileCartePosition()-1).getTerrain().getTerrainType()== 8
+			|| tuileRep.findByTuileCarteposition(this.getTuileCartePosition()-1).getTerrain().getTerrainType()== 9){
+				return true;
+		}
+		
+		if((this.getTuileCartePosition()+1<this.getVille().getVilleLong()*this.getVille().getVilleLarg()) 
+			&& tuileRep.findByTuileCarteposition(this.getTuileCartePosition()+1).getTerrain().getTerrainType()== 8
+			|| tuileRep.findByTuileCarteposition(this.getTuileCartePosition()+1).getTerrain().getTerrainType()== 9){
+				return true;
+		}
+		
+		if((this.getTuileCartePosition()-this.getVille().getVilleLarg()>=0) 
+			&& tuileRep.findByTuileCarteposition(this.getTuileCartePosition()-this.getVille().getVilleLarg()).getTerrain().getTerrainType()== 8
+			|| tuileRep.findByTuileCarteposition(this.getTuileCartePosition()-this.getVille().getVilleLarg()).getTerrain().getTerrainType()== 9){
+				return true;
+		}
+		
+		if((this.getTuileCartePosition()+this.getVille().getVilleLarg()<this.getVille().getVilleLong()*this.getVille().getVilleLarg()) 
+			&& tuileRep.findByTuileCarteposition(this.getTuileCartePosition()+this.getVille().getVilleLarg()).getTerrain().getTerrainType()== 8
+			|| tuileRep.findByTuileCarteposition(this.getTuileCartePosition()+this.getVille().getVilleLarg()).getTerrain().getTerrainType()== 9){
+				return true;
+		}
+
+
+		return false;
+	}
 		
 
 //METHODE POUR VOIR SI UNE CASE INFLUENCE LA VALEUR DE LA CASE A EVALUER:
