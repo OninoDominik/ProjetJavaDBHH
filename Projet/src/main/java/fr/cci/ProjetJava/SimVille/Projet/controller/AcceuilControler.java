@@ -25,7 +25,7 @@ public class AcceuilControler {
             model.addAttribute("page", page);
             return "accueil";
         }else {
-            page="F";
+            page="1";
             model.addAttribute("page", page);
             return "accueil";
         }
