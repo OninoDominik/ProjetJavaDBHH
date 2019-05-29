@@ -14,9 +14,9 @@
 
 
     <div th:style="|width: ${taille}|">
-        <div th:each="product : ${produits}"  style="float: left; width: 100px ">
-            <a th:href="@{|/tuilecarte/detail/${product.id}|}" >
-                <img th:src="@{${product.terrain.terrainImgUrl}}"  class="card-img-top" />
+        <div th:each="url : ${Listeurl}"  style="float: left; width: 100px ">
+            <a th:href="" >
+                <img th:src="@{${url}}"  class="card-img-top" />
             </a>
         </div>
     </div>

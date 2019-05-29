@@ -105,6 +105,31 @@ public class VilleController {
         model.addAttribute("produits", TuileCarte);
         return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
     }
+    @GetMapping("/degrade/{id}")
+    public String AfficheCarteIddegrader(@PathVariable int id, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
+
+        Ville tempo= villeRepository.findById(id);
+        if (tempo==null)
+        {
+            String code="400";
+            String message="Bad request : L'id de l'objet Ville n'existe pas";
+            model.addAttribute("code", code);
+            model.addAttribute("message", message);
+            return "error";
+        }
+        else {
+
+           /* Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
+            List<String>ListeUrl=
+            int taille = (tempo.getVilleLarg() * 100);
+            String tailletoString = Integer.toString(taille);
+            tailletoString += "px";
+            model.addAttribute("taille", tailletoString);
+            model.addAttribute("Listeurl", ListeUrl);
+            return "Carte3";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources*/
+
+        }
+    }
 
     @GetMapping("/affiche/{id}")
     public String AfficheCarteId(@PathVariable int id, Model model) { // model est un paramettre envoyé lors de l'appel de la fonction. Il permet de transférer des informations vers la vue (équivalent de la requette dans servlet?)
