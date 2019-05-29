@@ -78,8 +78,9 @@ Create IMAGE URL:
 
 		-------------------------------------------------
 		
-		public String createImageUrl(float value, String nomTerrain){
-			String result = nomTerrain.toUpperCase();
+		public String createImageUrl(float value, String nomTerrain){			
+			String result = "/media/tiles/";
+			result += nomTerrain.toUpperCase();
 			
 			int gradiantValue = (Math.round(value) + 100)/25)+1;
 			if(gradiantValue>8){
