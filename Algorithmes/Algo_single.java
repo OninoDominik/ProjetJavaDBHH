@@ -20,11 +20,10 @@ NOTATIONS:
 RESTE A DEFINIR:
 *	methode busStopImpact(int Xc, int Yc), qui calcule l'influence de la		A Faire
 	case "Arret de Bus" considérée sur la case aux coordonnées Xc, Yc.
-* 	methode isNearRoad()														A Faire
+* 	methode isNearRoad()														Fait
 * 	redéfinir GetBounds pour le cas "individuel" 								Fait
 * 	définir "Tuile(x,y)" ainsi que le modèle de tableau utilisée pour le 		Fait
 	calcul
-* 	Remplacer les appels d'attributs BARBARES par leur GETTERS associés			A Faire
 */
 	
 //_______________________________________________________________________
@@ -32,40 +31,31 @@ RESTE A DEFINIR:
 //GET DMAX VILLE:
 		//-------------------------------------------------
 		public float DmaxMax(){
-			float Dmax=this.rivDmax;
-			if(Dmax<this.forDmax){
-				Dmax=this.forDmax;
+			float Dmax=this.getRivDMax();
+			if(Dmax<this.getForDMax()){
+				Dmax=this.getForDMax();
 			}
-			if(Dmax<this.forDmax){
-				Dmax=this.forDmax;
+			if(Dmax<this.getForDMax()){
+				Dmax=this.getForDMax();
 			}
-			if(Dmax<this.eclmax){
-				Dmax=this.eclDmax;
+			if(Dmax<this.getEclDMax()){
+				Dmax=this.getEclDMax();
 			}
-			if(Dmax<this.eglDmax){
-				Dmax=this.eglDmax;
+			if(Dmax<this.getEglDMax()){
+				Dmax=this.getEglDMax();
 			}
-			if(Dmax<this.comDmax){
-				Dmax=this.comDmax;
+			if(Dmax<this.getComDMax()){
+				Dmax=this.getComDMax();
 			}
-			if(Dmax<this.polDmax){
-				Dmax=this.polDmax;
-			}
-			if(Dmax<this.polDmax){
-				Dmax=this.polDmax;
-			}
-			if(Dmax<this.polDmax){
-				Dmax=this.polDmax;
-			}
-			if(Dmax<this.rtbDmax){
-				Dmax=this.rtbDmax;
-			}
+			if(Dmax<this.getPolDMax()){
+				Dmax=this.getPolDMax();
+			}			
 			
 			return Dmax;		
 		}
 
 
-//GET BOUNDS: 
+//GET BOUNDS:  ( a FINIR ) 
 		//-------------------------------------------------
 		
 		public int[] getBounds(int Xc, int Yc){
@@ -79,8 +69,8 @@ RESTE A DEFINIR:
 				Xmib = (Xc - Dmax)%1;
 			}
 			
-			if(Xc+Dmax>Ville.getXmax()){
-				Xmab = Ville.getXmax();
+			if(Xc+Dmax>this.getVille().getXmax()){
+				Xmab = this.getVille().getXmax();
 			}
 			else{
 				Xmab = (Xc + Dmax)%1;
@@ -93,8 +83,8 @@ RESTE A DEFINIR:
 				Ymib = (Yc - Dmax)%1;
 			}
 			
-			if(Yc+Dmax>Ville.getYmax()){
-				Ymab = Ville.getYmax();
+			if(Yc+Dmax>this.getVille().getYmax()){
+				Ymab = this.getVille().getYmax();
 			}
 			else{
 				Ymab = (Yc + Dmax)%1;
@@ -111,21 +101,19 @@ RESTE A DEFINIR:
 	public float getDMax(){
 		switch (this.terrain.getTerrainType()){
 			case 1:
-				return this.ville.getForDMax();
+				return this.getVille().getForDMax();
 			case 2:
-				return this.ville.getRivDMax(); 
+				return this.getVille().getRivDMax(); 
 			case 3:
-				return this.ville.getComDMax();
+				return this.getVille().getComDMax();
 			case 4:
-				return this.ville.getEclDMax();
+				return this.getVille().getEclDMax();
 			case 5:
-				return this.ville.getEglDMax();
+				return this.getVille().getEglDMax();
 			case 6:
-				return this.ville.getPolDMax();
-			case 7:
-				return this.ville.getResDMax();
+				return this.getVille().getPolDMax();
 			case 8:
-				return this.ville.getRtbDMax();
+				return this.getVille().getRtbDMax();
 			default:
 				return 0.0;
 		}
@@ -135,21 +123,19 @@ RESTE A DEFINIR:
 	public float getPMax(){
 		switch (this.terrain.getTerrainType()){
 			case 1:
-				return this.ville.getForPMax();
+				return this.getVille().getForPMax();
 			case 2:
-				return this.ville.getRivPMax(); 
+				return this.getVille().getRivPMax(); 
 			case 3:
-				return this.ville.getComPMax();
+				return this.getVille().getComPMax();
 			case 4:
-				return this.ville.getEclPMax();
+				return this.getVille().getEclPMax();
 			case 5:
-				return this.ville.getEglPMax();
+				return this.getVille().getEglPMax();
 			case 6:
-				return this.ville.getPolPMax();
-			case 7:
-				return this.ville.getResPMax();
+				return this.getVille().getPolPMax();
 			case 8:
-				return this.ville.getRtbPMax();
+				return this.getVille().getRtbPMax();
 			default:
 				return 0.0;
 		}		
