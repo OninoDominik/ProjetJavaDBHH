@@ -5,6 +5,7 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.TuileCarteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -264,7 +265,71 @@ public class TuileCarte {
         }
         return tuileValue;
     }
+    //METHODES NECESSAIRES POUR AFFICHER LE GRADIANT DE VALEURS IMMOBILIERES:
+    public float getInfluenceTot(List<TuileCarte> tuileList){
+        int terrainType = this.getTerrain().getTerrainType();
+        float Vmin = this.ville.getVilleValeurImmoMin();
+        float Vmax = this.ville.getVilleValeurImmoMax();
+        float tuileValue = (Vmin+Vmax)/2;
+        float P = 0.0f;
 
+        if(terrainType==1 || terrainType==3  || terrainType==7 ) {
+            //On récupère les éléments dont on a besoin pour le calcul:
+            int Xc = this.getX();
+            int Yc = this.getY();
+
+            int Xmin = this.getBounds(Xc, Yc)[0];
+            int Xmax = this.getBounds(Xc, Yc)[1];
+            int Ymin = this.getBounds(Xc, Yc)[2];
+            int Ymax = this.getBounds(Xc, Yc)[3];
+
+            //On calcule l'influence totale s'appliquant sur la tuile:
+            for (int x = Xmin; x < Xmax; x++) {
+                for (int y = Ymin; y < Ymax; y++) {
+                    P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc);
+                }
+            }
+            P -= tuileList.get(Xc + Yc * this.ville.getVilleLarg()).getImpact(Xc, Yc);
+
+            //On vérifie que l'influence totale est comprise entre -100 et +100:
+            if (P < -100) {
+                P = -100;
+            } else if (P > 100) {
+                P = 100;
+            }
+        }
+        else{
+            P = -1000.0f;
+        }
+        return P;
+    }
+
+    public String createImageUrl(float value, String nomTerrain){
+        String result = "/media/tiles/";
+        result += nomTerrain.toUpperCase();
+
+        int gradiantValue = ((Math.round(value) + 100)/25)+1;
+        if(gradiantValue>8){
+            gradiantValue=8;
+        }
+        else if(gradiantValue<1){
+            gradiantValue=0;
+        }
+
+
+        result += "_"+gradiantValue+".png";
+        return result;
+    }
+
+    public List<String> createAllUrl(List<TuileCarte> tuileList){
+        List<String> valueVille = new ArrayList<>();
+        int length = this.getVille().getVilleLong()*this.getVille().getVilleLarg();
+        for(int i=0; i<length; i++){
+            valueVille.add(createImageUrl(tuileList.get(i).getInfluenceTot(tuileList),tuileList.get(i).getTerrain().getTerrainNomShort()));
+        }
+
+        return valueVille;
+    }
 
 
 }

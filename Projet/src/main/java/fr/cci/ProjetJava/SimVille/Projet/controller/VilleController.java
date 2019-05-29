@@ -119,14 +119,16 @@ public class VilleController {
         }
         else {
 
-           /* Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
-            List<String>ListeUrl=
+            Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
+            List<TuileCarte> TuileCarte3 = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
+            TuileCarte tuileCarte2= TuileCarte3.get(0);
+            List<String>ListeUrl=tuileCarte2.createAllUrl(TuileCarte3);
             int taille = (tempo.getVilleLarg() * 100);
             String tailletoString = Integer.toString(taille);
             tailletoString += "px";
             model.addAttribute("taille", tailletoString);
             model.addAttribute("Listeurl", ListeUrl);
-            return "Carte3";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources*/
+            return "Carte3";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
 
         }
     }
