@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/tuilecarte")
@@ -62,6 +63,9 @@ public class TuileCarteController {
     public String afficheCarte(@PathVariable int id, Model model) {
         TuileCarte tuileCarte = tuileCarteRepository.findById(id);
         if (tuileCarte!=null) {
+            List<TuileCarte> listTuileParVille= tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
+            float valeurImmo= tuileCarte.getValue(listTuileParVille);
+            model.addAttribute("valeurImmo", valeurImmo);
             model.addAttribute("tuileCarte", tuileCarte);
             return "modifT";
         } else

@@ -189,7 +189,7 @@ public class TuileCarte {
             Ymin = Math.round((Yc - Dmax)%1);
         }
 
-        if(Yc+Dmax>this.getVille().getVilleLong(){
+        if(Yc+Dmax>this.getVille().getVilleLong()){
             Ymax = this.getVille().getVilleLong();
         }
         else{
@@ -224,10 +224,10 @@ public class TuileCarte {
         float Vmax = this.ville.getVilleValeurImmoMax();
         float tuileValue = (Vmin+Vmax)/2;
 
-        int Xmin = this.getBounds(Xc,Yc)[1];
-        int Xmax = this.getBounds(Xc,Yc)[2];
-        int Ymin = this.getBounds(Xc,Yc)[3];
-        int Ymax = this.getBounds(Xc,Yc)[4];
+        int Xmin = this.getBounds(Xc,Yc)[0];
+        int Xmax = this.getBounds(Xc,Yc)[1];
+        int Ymin = this.getBounds(Xc,Yc)[2];
+        int Ymax = this.getBounds(Xc,Yc)[3];
 
         //On calcule l'influence totale s'appliquant sur la tuile:
         for(int x = Xmin; x<Xmax; x++){
