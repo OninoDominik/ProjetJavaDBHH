@@ -245,7 +245,7 @@ input {
 /* HEADER SECTION */
 
 #h {
-  background: url(../img/photo_accueil.jpeg) no-repeat center top;
+  background: url(../img/photo_accueil.jpg) no-repeat center top;
   padding-top: 150px;
   text-align: center;
   background-attachment: relative;
@@ -316,7 +316,6 @@ i {
   background-attachment: fixed;
   background-position: 50% 0;
   background-repeat: no-repeat;
-  height: 450px;
   position: relative;
 }
 
@@ -447,18 +446,22 @@ i {
 /* Copyrights */
 
 #copyrights {
-  background: #f3f3f3;
+  background: #000000;
   padding: 20px 0;
   text-align: center;
 }
 
 #copyrights p {
   margin-bottom: 5px;
-  color: #555;
+  color: #ffa64d;
 }
 
 #copyrights a {
-  color: #f27242;
+  color: #ffa64d;
+  /*color:#f27242;*/
+}
+#copyrights h5 {
+  color: #ffffff;
 }
 
 .credits {

@@ -14,6 +14,7 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping(path="/ville")
