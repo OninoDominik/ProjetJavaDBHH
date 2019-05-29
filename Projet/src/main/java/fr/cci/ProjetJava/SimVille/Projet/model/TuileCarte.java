@@ -111,7 +111,7 @@ public class TuileCarte {
             //case 8:
             //    return this.getVille().getRtbDMax();
             default:
-                return 0.0f;
+                return 1.0f;
         }
     }
 
@@ -172,28 +172,28 @@ public class TuileCarte {
             Xmin = 0;
         }
         else{
-            Xmin = Math.round((Xc - Dmax)%1);
+            Xmin = Math.round((Xc - Dmax));
         }
 
         if(Xc+Dmax>this.getVille().getVilleLarg()){
             Xmax = this.getVille().getVilleLarg();
         }
         else{
-            Xmax = Math.round((Xc + Dmax)%1);
+            Xmax = Math.round((Xc + Dmax));
         }
 
         if(Yc-Dmax<0){
             Ymin = 0;
         }
         else{
-            Ymin = Math.round((Yc - Dmax)%1);
+            Ymin = Math.round((Yc - Dmax));
         }
 
         if(Yc+Dmax>this.getVille().getVilleLong()){
             Ymax = this.getVille().getVilleLong();
         }
         else{
-            Ymax = Math.round((Yc + Dmax)%1);
+            Ymax = Math.round((Yc + Dmax));
         }
 
         int[] tab = new int [] {Xmin,Xmax,Ymin,Ymax};
@@ -201,17 +201,21 @@ public class TuileCarte {
     }
 
     public float getImpact(int Xc, int Yc){
-        float D = (float) Math.sqrt((this.getX()-Xc)^2+(this.getY()-Yc)^2);
+        float D = (float) Math.sqrt(Math.pow((this.getX()-Xc),2)+Math.pow((this.getY()-Yc),2));
         float Dmax = this.getDMax();
 
         float P = 0.0f;
 
-        //if(this.getTerrainType()== 8 && this.isNearRoad()){
-        //    P = this.getBusStopImpact(Xc,Yc);
-        //}
-        //else{
-            P = this.getPMax() * ((Dmax-D)/Dmax);
-        //}
+        if (Dmax>=D) {
+            //if(this.getTerrainType()== 8 && this.isNearRoad()){
+            //    P = this.getBusStopImpact(Xc,Yc);
+            //}
+            //else{
+                P = this.getPMax() * ((Dmax - D) / Dmax);
+                System.out.println("P est = a : " + P);
+            //}
+        }
+
         return P;
     }
 
@@ -234,9 +238,13 @@ public class TuileCarte {
             int Ymax = this.getBounds(Xc,Yc)[3];
 
             //On calcule l'influence totale s'appliquant sur la tuile:
+            System.out.println("("+Xmin+";"+Xmax+") :"+P);
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
-                    P += tuileList.get(x + y * this.ville.getVilleLarg()).getImpact(Xc, Yc);
+                    P += (tuileList.get(x+y*this.ville.getVilleLarg())).getImpact(Xc, Yc);
+                    System.out.println(x + "   @@@@@@@   " + y +"\n");
+                    System.out.println(P+"\n");
+
                 }
             }
             P -= tuileList.get(Xc+Yc*this.ville.getVilleLarg()).getImpact(Xc, Yc);

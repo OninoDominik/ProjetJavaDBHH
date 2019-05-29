@@ -33,6 +33,8 @@ public class Ville {
     private float comPMax;
     private float polDMax;
     private float polPMax;
+    private float rtbDMax;
+    private float rtbPMax;
 
     public Ville()
     {
@@ -102,8 +104,7 @@ public class Ville {
         this.rtbPMax = rtbPMax;
     }
 
-    private float rtbDMax;
-    private float rtbPMax;
+
 
 
 
