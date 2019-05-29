@@ -215,37 +215,45 @@ public class TuileCarte {
         return P;
     }
 
+
     public float getValue(List<TuileCarte> tuileList){
-        //On récupère les éléments dont on a besoin pour le calcul:
-        int Xc = this.getX();
-        int Yc = this.getY();
-        float P = 0.0f;
+        int terrainType = this.getTerrain().getTerrainType();
         float Vmin = this.ville.getVilleValeurImmoMin();
         float Vmax = this.ville.getVilleValeurImmoMax();
         float tuileValue = (Vmin+Vmax)/2;
 
-        int Xmin = this.getBounds(Xc,Yc)[0];
-        int Xmax = this.getBounds(Xc,Yc)[1];
-        int Ymin = this.getBounds(Xc,Yc)[2];
-        int Ymax = this.getBounds(Xc,Yc)[3];
+        if(terrainType==1 || terrainType==3  || terrainType==7 ){
+            //On récupère les éléments dont on a besoin pour le calcul:
+            int Xc = this.getX();
+            int Yc = this.getY();
+            float P = 0.0f;
 
-        //On calcule l'influence totale s'appliquant sur la tuile:
-        for(int x = Xmin; x<Xmax; x++){
-            for(int y = Ymin; y<Ymax; y++){
-                P += tuileList.get(x+y*this.ville.getVilleLarg()).getImpact(Xc,Yc);
+            int Xmin = this.getBounds(Xc,Yc)[0];
+            int Xmax = this.getBounds(Xc,Yc)[1];
+            int Ymin = this.getBounds(Xc,Yc)[2];
+            int Ymax = this.getBounds(Xc,Yc)[3];
+
+            //On calcule l'influence totale s'appliquant sur la tuile:
+            for (int x = Xmin; x < Xmax; x++) {
+                for (int y = Ymin; y < Ymax; y++) {
+                    P += tuileList.get(x + y * this.ville.getVilleLarg()).getImpact(Xc, Yc);
+                }
             }
-        }
+            P -= tuileList.get(Xc+Yc*this.ville.getVilleLarg()).getImpact(Xc, Yc);
 
-        //On vérifie que l'influence totale est comprise entre -100 et +100:
-        if(P < -100){
-            P = -100;
-        }
-        else if(P > 100){
-            P = 100;
-        }
+            //On vérifie que l'influence totale est comprise entre -100 et +100:
+            if (P < -100) {
+                P = -100;
+            } else if (P > 100) {
+                P = 100;
+            }
 
-        //On calcule la valeur immobilière de la tuile:
-        tuileValue = tuileValue + P*(Vmax-tuileValue)/100;
+            //On calcule la valeur immobilière de la tuile:
+            tuileValue = tuileValue + P * (Vmax - tuileValue) / 100;
+        }
+        else{
+            tuileValue = 0.0f;
+        }
         return tuileValue;
     }
 
