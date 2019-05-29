@@ -215,8 +215,10 @@ public class TuileCarte {
         return P;
     }
 
-    public float getValue(int Xc, int Yc, List<TuileCarte> tuileList){
+    public float getValue(List<TuileCarte> tuileList){
         //On récupère les éléments dont on a besoin pour le calcul:
+        int Xc = this.getX();
+        int Yc = this.getY();
         float P = 0.0f;
         float Vmin = this.ville.getVilleValeurImmoMin();
         float Vmax = this.ville.getVilleValeurImmoMax();
