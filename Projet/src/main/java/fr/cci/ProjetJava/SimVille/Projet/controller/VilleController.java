@@ -66,8 +66,8 @@ public class VilleController {
         n.setComPMax(comPMax);
         n.setPolDMax(polDMax);
         n.setPolPMax(polPMax);
-        n.setRivDMax(rtbDMax);
-        n.setRivPMax(rtbPMax);
+        n.setRtbDMax(rtbDMax);
+        n.setRtbPMax(rtbPMax);
         n.setForDMax(forDMax);
         n.setForPMax(forPMax);
         villeRepository.save(n);
@@ -114,6 +114,7 @@ public class VilleController {
             String code="400";
             String message="Bad request : L'id de l'objet Ville n'existe pas";
             model.addAttribute("code", code);
+            model.addAttribute("id", id);
             model.addAttribute("message", message);
             return "error";
         }

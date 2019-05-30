@@ -57,6 +57,7 @@ public class Ville {
         this.polPMax = 15;
         this.rtbDMax = 4;
         this.rtbPMax = 35;
+
     }
 
     public Ville(Integer villeId, String villeNom, Integer villeLong, Integer villeLarg, float villeValeurImmoMin, float villeValeurImmoMax, float rivDMax, float rivPMax, float forDMax, float forPMax, float eclDMax, float eclPMax, float eglDMax, float eglPMax, float comDMax, float comPMax, float polDMax, float polPMax, float rtbDMax, float rtbPMax) {
@@ -66,6 +67,8 @@ public class Ville {
         this.villeLarg = villeLarg;
         this.villeValeurImmoMin = villeValeurImmoMin;
         this.villeValeurImmoMax = villeValeurImmoMax;
+        this.rtbDMax = rtbDMax;
+        this.rtbPMax = rtbPMax;
         this.rivDMax = rivDMax;
         this.rivPMax = rivPMax;
         this.forDMax = forDMax;
@@ -78,8 +81,7 @@ public class Ville {
         this.comPMax = comPMax;
         this.polDMax = polDMax;
         this.polPMax = polPMax;
-        this.rtbDMax = rtbDMax;
-        this.rtbPMax = rtbPMax;
+
     }
 
     public Ville(String villeNom, Integer villeLong, Integer villeLarg, float villeValeurImmoMin, float villeValeurImmoMax, float rivDMax, float rivPMax, float forDMax, float forPMax, float eclDMax, float eclPMax, float eglDMax, float eglPMax, float comDMax, float comPMax, float polDMax, float polPMax, float rtbDMax, float rtbPMax) {
@@ -102,6 +104,7 @@ public class Ville {
         this.polPMax = polPMax;
         this.rtbDMax = rtbDMax;
         this.rtbPMax = rtbPMax;
+
     }
 
 
