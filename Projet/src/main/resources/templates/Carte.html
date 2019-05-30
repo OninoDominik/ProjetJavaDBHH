@@ -66,12 +66,11 @@
     <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
         Valeur Immobiliere Max : [[${produits[0].ville.villeValeurImmoMax}]]
     </h5>
-   <a  th:href="@{|/ville/degrade/${produits[0].ville.Id}|}"> <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
-        lien vers degrader</h5> </a>
-
+    <a  th:href="@{|/ville/degrade/${produits[0].ville.Id}|}"> <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
+        Voir la ville en dégradé de couleurs</h5> </a>
 </div>
 
- <!-- footer -->
+<!-- footer -->
 <div id="copyrights">
    <div class="container">
      <div class="credits">      
@@ -79,8 +78,8 @@
                    <div class="col-lg-2 col-md-10 col-sm-12">
                           <h5>Information</h5><br>
                           <ul class="row">
-                        <a class="col-lg-12 col-sm-12 col-xs-3"  href="accueil.html">Accueil</a>
-                       <a class="col-lg-12 col-sm-12 col-xs-3" href="carte.html">Modifier Tuile</a>
+                        <a class="col-lg-12 col-sm-12 col-xs-3"  href="accueil.html"><p>Accueil</p></a>
+                       <a class="col-lg-12 col-sm-12 col-xs-3" href="carte.html"><p>Modifier Tuile</p></a>
                       
                      </ul>
                    </div>
@@ -104,10 +103,12 @@
                         <div class="col-lg-3 col-md-9 col-sm-12">
                            <h5 class="text-white">Follow us</h5><br>
                            <ul class="social-network social-circle">
-                             <li><a href="https://www.facebook.com/hugor.mayambu" class="icoFacebook" title="Facebook"><span class="fab fa-facebook-f"></span></a></li>
-                             <li><a href="#https://twitter.com/mayambuh" class="icoTwitter" title="Twitter"><span class="fab fa-twitter"></span></a></li>
-                             <li><a href="https://www.youtube.com/channel/UCFK_yzEzZ3A5IT54B3tefww?view_as=subscriber" class="icoYoutube" title="Youtube"><span class="fab fa-youtube"></span></a></li>
-                             <li><a href="#" class="icoEnvelope" title="Envelope"><span class="fa fa-envelope"></span></a></li>
+                            <div class="row" style="margin-bottom: 10px">
+                             <li><a href="https://www.facebook.com/hugor.mayambu" class="icoFacebook" title="Facebook"><span class="fab fa-facebook-f"></span></a></li></div>
+                             <div class="row" style="margin-bottom: 10px">
+                             <li><a href="#https://twitter.com/mayambuh" class="icoTwitter" title="Twitter"><span class="fab fa-twitter"></span></a></li></div>
+                             <div class="row">
+                             <li><a href="https://www.youtube.com/channel/UCFK_yzEzZ3A5IT54B3tefww?view_as=subscriber" class="icoYoutube" title="Youtube"><span class="fab fa-youtube"></span></a></li></div>
                            </ul>
                          </div>
                </div>
