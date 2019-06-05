@@ -23,11 +23,11 @@ public class AcceuilControler {
     public  String afficheAcceuil(@RequestParam(required = false)  String page, Model model) {
         if (page!=null || page=="2#"){
             model.addAttribute("page", page);
-            return "accueil";
+            return "Accueil";
         }else {
             page="1";
             model.addAttribute("page", page);
-            return "accueil";
+            return "Accueil";
         }
 
     }
