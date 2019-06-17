@@ -6,4 +6,4 @@ cliquez sur onglet a droite maven
 si il ne trouve aps de projet cliquez sur + et ajouter le fichier pom.xml
 cliquez sur les 2 fleches qui forme un rond
 validez le add plugins en pop up
-spring-boot>spring-boot:run
+puis dans plugins -> spring-boot>spring-boot:run (dans l'onglet maven)
