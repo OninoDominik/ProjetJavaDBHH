@@ -24,3 +24,4 @@ Installation:
 7 - Cliquez sur les 2 fleches qui forment un rond afin d'actualiser    
 8 - Validez le add plugins en pop up si il s'affiche    
 9 - Puis dans plugins -> spring-boot>spring-boot:run (dans l'onglet maven) pour lancer le projet   
+10- Allez sur la page http://localhost:8082/simville/accueil
