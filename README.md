@@ -1,7 +1,17 @@
 # ProjetJavaDBHH
 
+Equipe:
+
+Dominik
+Benjamin
+Haider
+Hugor
+Murat
+
 Nota bene:
-GitHub ne permet de gerrer gratuitement qu'un maximum de 4 collaborateurs, un 5émé nous a été imposer nous avons donc du utiliser plusieurs repo git ProjetJavaDBHH pour le backoffice et ProjetJava qui etait le git de debut et qui est devenu le git du front office
+GitHub ne permet de gerrer gratuitement qu'un maximum de 4 collaborateurs, un 5émé nous a été imposer nous avons donc du utiliser plusieurs repo git :      
+- ProjetJavaDBHH pour le backoffice               
+- ProjetJava qui etait le git de debut et qui est devenu le git du front office      
 
 Installation:
 
