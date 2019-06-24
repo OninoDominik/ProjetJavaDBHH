@@ -117,6 +117,7 @@ public class VilleController {
             model.addAttribute("code", code);
             model.addAttribute("id", id);
             model.addAttribute("message", message);
+
             return "error";
         }
         else {
@@ -130,6 +131,7 @@ public class VilleController {
             tailletoString += "px";
             model.addAttribute("taille", tailletoString);
             model.addAttribute("Listeurl", ListeUrl);
+            model.addAttribute("ville", tempo);
             return "cartedegrade";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
 
         }

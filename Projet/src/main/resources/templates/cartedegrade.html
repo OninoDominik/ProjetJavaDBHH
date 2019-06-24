@@ -48,7 +48,13 @@
 
 <div class="container" style="margin-bottom: 70px">
 
-    <h1 style="text-align: center; margin-top: 80px; margin-bottom: 70px">Application villesim</h1>
+    <h1 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
+        Votre Ville:  [[${ville.villeNom}]]
+    </h1>
+    <h5 style="text-align: center" th:inline="text" > Valeur Immobiliere Min : [[${ville.villeValeurImmoMin}]]</h5>
+    <h5 style="text-align: center" th:inline="text" > Valeur Immobiliere Max : [[${ville.villeValeurImmoMax}]]</h5>
+    <a  th:href="@{|/ville/affiche/${id}|}"> <h5 style="text-align: center; margin-top: 40px; margin-bottom: 40px" th:inline="text" >
+        Revenir aux details de la ville </h5> </a>
 
 
     <div th:style="|width: ${taille}|">
@@ -58,20 +64,19 @@
             </a>
         </div>
     </div>
-    <a  th:href="@{|/ville/affiche/${id}|}"> <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
-        Revenir aux details de la ville </h5> </a>
+
 </div>
 <!-- footer -->
 <div id="copyrights">
    <div class="container">
-     <div class="credits">      
+     <div class="credits">
        <div class="row">
                    <div class="col-lg-2 col-md-10 col-sm-12">
                           <h5>Information</h5><br>
                           <ul class="row">
                         <a class="col-lg-12 col-sm-12 col-xs-3"  href="accueil.html"><p>Accueil</p></a>
                        <a class="col-lg-12 col-sm-12 col-xs-3" href="carte.html"><p>Modifier Tuile</p></a>
-                      
+
                      </ul>
                    </div>
 

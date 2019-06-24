@@ -51,6 +51,10 @@
     <h1 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
        Votre Ville:  [[${produits[0].ville.villeNom}]]
     </h1>
+    <h5 style="text-align: center" th:inline="text" > Valeur Immobiliere Min : [[${produits[0].ville.villeValeurImmoMin}]]</h5>
+    <h5 style="text-align: center" th:inline="text" > Valeur Immobiliere Max : [[${produits[0].ville.villeValeurImmoMax}]]</h5>
+    <a  th:href="@{|/ville/degrade/${produits[0].ville.Id}|}"> <h5 style="text-align: center; margin-top: 40px; margin-bottom: 40px" th:inline="text" >
+        Voir la ville en dégradé de couleurs</h5> </a>
 
 
     <div th:style="|width: ${taille}|">
@@ -60,14 +64,7 @@
             </a>
         </div>
     </div>
-    <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
-        Valeur Immobiliere Min :[[${produits[0].ville.villeValeurImmoMin}]]
-    </h5>
-    <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
-        Valeur Immobiliere Max : [[${produits[0].ville.villeValeurImmoMax}]]
-    </h5>
-    <a  th:href="@{|/ville/degrade/${produits[0].ville.Id}|}"> <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
-        Voir la ville en dégradé de couleurs</h5> </a>
+
 </div>
 
 <!-- footer -->
