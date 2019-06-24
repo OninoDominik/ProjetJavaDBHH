@@ -14,6 +14,7 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -160,11 +161,24 @@ public class VilleController {
     public void setCarte(Ville Ville) {
         System.out.println(terrainRepository.findById(1));
         Terrain terrainForet= (Terrain)terrainRepository.findById(1);
-        for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i++) {
-            TuileCarte temp =new TuileCarte(i, terrainForet, Ville);
-            tuileCarteRepository.save(temp);
+
+        for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i=i+1000) {
+            int max=1000;
+            if (max> Ville.getVilleLong() * Ville.getVilleLarg()-i)
+            {
+                max=Ville.getVilleLong() * Ville.getVilleLarg()-i;
+            }
+            List<TuileCarte> listTuile = new ArrayList<TuileCarte>();
+            for(int j=0; j<max ;j++)
+            {            TuileCarte temp =new TuileCarte(i, terrainForet, Ville);
+                listTuile.add(temp);
+            }
+            System.out.println(listTuile.size());
+            tuileCarteRepository.saveAll(listTuile);
+            listTuile.clear();
         }
     }
+
     @GetMapping(path = "/error")
     public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
         int code = response.getStatus();
