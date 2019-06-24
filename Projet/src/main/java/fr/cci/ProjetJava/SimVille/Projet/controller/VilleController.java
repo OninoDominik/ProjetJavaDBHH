@@ -162,7 +162,7 @@ public class VilleController {
         System.out.println(terrainRepository.findById(1));
         Terrain terrainForet= (Terrain)terrainRepository.findById(1);
 
-        for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i=i+1000) {
+        for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i=i) {
             int max=1000;
             if (max> Ville.getVilleLong() * Ville.getVilleLarg()-i)
             {
@@ -170,8 +170,10 @@ public class VilleController {
             }
             List<TuileCarte> listTuile = new ArrayList<TuileCarte>();
             for(int j=0; j<max ;j++)
-            {            TuileCarte temp =new TuileCarte(i, terrainForet, Ville);
+            {
+                TuileCarte temp =new TuileCarte(i, terrainForet, Ville);
                 listTuile.add(temp);
+                i++;
             }
             System.out.println(listTuile.size());
             tuileCarteRepository.saveAll(listTuile);
