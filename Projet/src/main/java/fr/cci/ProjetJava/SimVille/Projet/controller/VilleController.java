@@ -174,11 +174,9 @@ public class VilleController {
         Terrain terrainForet= (Terrain)terrainRepository.findById(1);
 
         for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i=i) {
-            int max=1000;
-            if (max> Ville.getVilleLong() * Ville.getVilleLarg()-i)
-            {
-                max=Ville.getVilleLong() * Ville.getVilleLarg()-i;
-            }
+
+              int  max=Ville.getVilleLong() * Ville.getVilleLarg();
+
             List<TuileCarte> listTuile = new ArrayList<TuileCarte>();
             for(int j=0; j<max ;j++)
             {

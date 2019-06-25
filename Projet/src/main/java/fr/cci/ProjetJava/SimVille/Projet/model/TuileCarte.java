@@ -213,7 +213,6 @@ public class TuileCarte {
             //}
             //else{
                 P = this.getPMax() * ((Dmax - D) / Dmax);
-                System.out.println("P est = a : " + P);
             //}
         }
 
@@ -243,8 +242,7 @@ public class TuileCarte {
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
                     P += (tuileList.get(x+y*this.ville.getVilleLarg())).getImpact(Xc, Yc);
-                    System.out.println(x + "   @@@@@@@   " + y +"\n");
-                    System.out.println(P+"\n");
+
 
                 }
             }
