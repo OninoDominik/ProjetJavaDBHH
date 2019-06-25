@@ -11,11 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import fr.cci.ProjetJava.SimVille.Projet.model.Ville;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
-
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping(path="/ville")
@@ -50,6 +51,8 @@ public class VilleController {
             @RequestParam float polPMax,
             @RequestParam float rtbDMax,
             @RequestParam float rtbPMax,
+            @RequestParam  (value="aleatoire", required = false, defaultValue = "false")
+            boolean aleatoire,
             HttpServletResponse httpServletResponse) {
         Ville n = new Ville();
         n.setVilleNom(villeNom);
@@ -81,7 +84,21 @@ public class VilleController {
         n.setForDMax(forDMax);
         n.setForPMax(forPMax);
         villeRepository.save(n);
-        setCarte(n);
+        System.out.println(aleatoire);
+        try
+        {
+            Thread.sleep(3000);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+        if ((aleatoire))
+        {setCarteAleatoire(n);
+            }
+        else
+        {setCarte(n); }
+
         HttpHeaders headers = new HttpHeaders();
             String redirection= "/ville/all";
         httpServletResponse.setHeader("Location", redirection);
@@ -197,5 +214,62 @@ public class VilleController {
         model.addAttribute("code", code);
         model.addAttribute("message", message);
         return "error";
+    }
+    public void setCarteAleatoire(Ville Ville) {
+        Random rand = new Random();
+        System.out.println(terrainRepository.findById(1));
+        Terrain terrain1= (Terrain)terrainRepository.findById(1);
+        Terrain terrain2= (Terrain)terrainRepository.findById(2);
+        Terrain terrain3= (Terrain)terrainRepository.findById(3);
+        Terrain terrain4= (Terrain)terrainRepository.findById(4);
+        Terrain terrain5= (Terrain)terrainRepository.findById(5);
+        Terrain terrain6= (Terrain)terrainRepository.findById(6);
+        Terrain terrain7= (Terrain)terrainRepository.findById(7);
+        Terrain terrain8= (Terrain)terrainRepository.findById(8);
+        Terrain terrain9= (Terrain)terrainRepository.findById(9);
+
+        for (int i = 0; i < Ville.getVilleLong() * Ville.getVilleLarg(); i=i) {
+
+            int  max=Ville.getVilleLong() * Ville.getVilleLarg();
+
+            List<TuileCarte> listTuile = new ArrayList<TuileCarte>();
+            for(int j=0; j<max ;j++)
+            {TuileCarte temp;
+                int alea=rand.nextInt(10);
+                switch (alea) {
+                    case 1:
+                temp = new TuileCarte(i, terrain1, Ville);
+                break;
+                    case 2:
+                temp = new TuileCarte(i, terrain2, Ville);
+                        break;
+                    case 3:
+                temp = new TuileCarte(i, terrain3, Ville);
+                    break;
+                    case 4:
+                temp = new TuileCarte(i, terrain4, Ville);
+                    break;
+                    case 5:
+                temp = new TuileCarte(i, terrain5, Ville);
+                    break;
+                    case 6:
+                temp = new TuileCarte(i, terrain6, Ville);
+                    break;
+                    case 7:
+                temp = new TuileCarte(i, terrain7, Ville);
+                    break;
+                    case 8:
+                temp = new TuileCarte(i, terrain8, Ville);
+                    break;
+                    default:
+                temp = new TuileCarte(i, terrain9, Ville);
+
+            }
+                listTuile.add(temp);
+                i++;
+            }
+            tuileCarteRepository.saveAll(listTuile);
+            listTuile.clear();
+        }
     }
 }
