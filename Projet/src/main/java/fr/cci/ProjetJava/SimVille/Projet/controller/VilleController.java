@@ -60,13 +60,22 @@ public class VilleController {
         n.setRivDMax(rivDMax);
         n.setRivPMax(rivPMax);
         n.setEclDMax(eclDMax);
-        n.setEclPMax(eclPMax);
+        if (eclPMax<0)
+        {n.setEclPMax(eclPMax);}
+        else
+        {n.setEclPMax(0-eclPMax);}
         n.setEglDMax(eglDMax);
-        n.setEglPMax(eglPMax);
+        if (eglPMax<0)
+        { n.setEglPMax(eglPMax);}
+        else
+        {n.setEglPMax(0-eglPMax);}
         n.setComDMax(comDMax);
         n.setComPMax(comPMax);
         n.setPolDMax(polDMax);
-        n.setPolPMax(polPMax);
+        if (polPMax<0)
+        {n.setPolPMax(polPMax);}
+        else
+        {n.setPolPMax(0-polPMax);}
         n.setRtbDMax(rtbDMax);
         n.setRtbPMax(rtbPMax);
         n.setForDMax(forDMax);
