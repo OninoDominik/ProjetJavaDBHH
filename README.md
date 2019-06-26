@@ -30,7 +30,7 @@ Créer le fichier Jar:
 Il est aussi possible de creer un fichier .JAR                     
 Dans l'invite de commander rendez vous dans le dossier projet qui se trouve dans le dossier \ProjetJavaDBHH                         
 Entrez la commande:                    
-Mvn clean package                     
+mvn clean package                     
 cela var créer un fichier \Projet-0.0.1-SNAPSHOT.jar dans le dossier ProjetJavaDBHH\Projet\target                                  
                   
 Ouvrir une invite de commande et taper:                    
