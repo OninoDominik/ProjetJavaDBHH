@@ -28,8 +28,8 @@ Installation:
 
 Jar:
 Il est aussi possible de lancer le fichier .JAR qui se trouve dans le projet
-Dans le projet il y a un fichier DBHHM.jar ou DBHHMsansBDD.jar
-un fichier .jar sera aussi disponible qui n'a aps besoin d'une bdd sql 
+Dans le projet il y a un fichier DBHHM.jar ou DBHHMsansBDD.jar  
+(DBHHMsansBDD.jar n'a pas besoin de base de données sql nomée projetjavadomben2)
 ouvrir une invite de commande et taper:
 java -jar -Xmx1G -Xms1G c:\DBHHM.jar (a remplacer par le chemin du fichier)
 
