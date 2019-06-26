@@ -25,3 +25,15 @@ Installation:
 8 - Validez le add plugins en pop up si il s'affiche    
 9 - Puis dans plugins -> spring-boot>spring-boot:run (dans l'onglet maven) pour lancer le projet   
 10- Allez sur la page http://localhost:8082/simville/accueil
+
+Jar:
+Il est aussi possible de lancer le fichier .JAR qui se trouve dans le projet
+Dans le projet il y a un fichier DBHHM.jar ou DBHHMsansBDD.jar  
+(DBHHMsansBDD.jar n'a pas besoin de base de données sql nomée projetjavadomben2)
+ouvrir une invite de commande et taper:
+java -jar -Xmx1G -Xms1G c:\DBHHM.jar (a remplacer par le chemin du fichier)
+
+
+
+une fois le JAR executé ou intellij en spring:run
+ouvrir un firefox/chrome/edge a l'adresse http://localhost:8082/simville/accueil
