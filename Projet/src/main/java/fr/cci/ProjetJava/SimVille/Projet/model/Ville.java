@@ -11,10 +11,11 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 @Entity
 public class Ville {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
     private String villeNom;
     private Integer villeLong;
@@ -24,7 +25,7 @@ public class Ville {
     private float rivDMax;
     private float rivPMax;
     private float forDMax;
-    private float forPMax ;
+    private float forPMax;
     private float eclDMax;
     private float eclPMax;
     private float eglDMax;
@@ -36,8 +37,7 @@ public class Ville {
     private float rtbDMax;
     private float rtbPMax;
 
-    public Ville()
-    {
+    public Ville() {
         this.villeNom = "default";
         this.villeLong = 8;
         this.villeLarg = 6;
@@ -106,11 +106,6 @@ public class Ville {
         this.rtbPMax = rtbPMax;
 
     }
-
-
-
-
-
 
 
     public String getVilleNom() {

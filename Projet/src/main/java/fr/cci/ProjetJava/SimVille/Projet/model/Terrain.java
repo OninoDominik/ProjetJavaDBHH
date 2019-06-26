@@ -5,27 +5,27 @@ import javax.persistence.*;
 @Entity
 public class Terrain {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
     private Integer terrainType;
     private String terrainNom;
     private String terrainNomShort;
     private String terrainImgUrl;
 
-    public Terrain(){
-         super();
+    public Terrain() {
+        super();
         this.Id = 100000;
         this.terrainType = 0;
-        this.terrainNom="default";
+        this.terrainNom = "default";
         this.terrainNomShort = "default";
         this.terrainImgUrl = "default";
-}
+    }
 
-    public Terrain(Integer terrainId,Integer terrainType,String terrainNom, String terrainNomShort, String terrainImgUrl) {
+    public Terrain(Integer terrainId, Integer terrainType, String terrainNom, String terrainNomShort, String terrainImgUrl) {
         super();
         this.Id = terrainId;
         this.terrainType = terrainType;
-        this.terrainNom=terrainNom;
+        this.terrainNom = terrainNom;
         this.terrainNomShort = terrainNomShort;
         this.terrainImgUrl = terrainImgUrl;
     }

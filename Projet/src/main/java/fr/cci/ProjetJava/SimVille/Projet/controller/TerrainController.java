@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping(path="/terrain")
+@RequestMapping(path = "/terrain")
 public class TerrainController {
     @Autowired
 
@@ -24,8 +24,7 @@ public class TerrainController {
     @PostMapping(path = "/add")
     public @ResponseBody
     String addNewTerrain(@RequestParam String terrainImgUrl, @RequestParam Integer terrainType,
-                         @RequestParam String terrainNomShort, @RequestParam String terrainNom)
-    {
+                         @RequestParam String terrainNomShort, @RequestParam String terrainNom) {
         Terrain t = new Terrain();
         t.setTerrainImgUrl(terrainImgUrl);
         t.setTerrainType(terrainType);

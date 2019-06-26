@@ -38,19 +38,14 @@ public class TuileCarteController {
     @PostMapping(path = "/add")
     public @ResponseBody
     ResponseEntity addNewTuileCarte(@RequestParam Integer tuileCarteposition,
-                            @RequestParam int ville, @RequestParam int terrain) {
+                                    @RequestParam int ville, @RequestParam int terrain) {
         TuileCarte t = new TuileCarte();
         t.setTuileCarteposition(tuileCarteposition);
-        System.out.println("0\n");
         Terrain terrain2 = terrainRepository.findById(terrain);
-        System.out.println("1\n");
-        Ville ville2= villeRepository.findById(ville);
-        System.out.println("2\n");
+        Ville ville2 = villeRepository.findById(ville);
         t.setVille(ville2);
-        System.out.println("3\n");
         t.setTerrain(terrain2);
-        System.out.println("4\n");
-        if (ville2 == null || terrain2==null) {
+        if (ville2 == null || terrain2 == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mauvaise id ville ou terrain");
         } else {
 
@@ -62,16 +57,15 @@ public class TuileCarteController {
     @GetMapping(path = "/detail/{id}")
     public String afficheCarte(@PathVariable int id, Model model) {
         TuileCarte tuileCarte = tuileCarteRepository.findById(id);
-        if (tuileCarte!=null) {
-            List<TuileCarte> listTuileParVille= tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
-            float valeurImmo= tuileCarte.getValue(listTuileParVille);
+        if (tuileCarte != null) {
+            List<TuileCarte> listTuileParVille = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
+            float valeurImmo = tuileCarte.getValue(listTuileParVille);
             model.addAttribute("valeurImmo", valeurImmo);
             model.addAttribute("tuileCarte", tuileCarte);
             return "modifT";
-        } else
-        {
-            String code="400";
-            String message="L'id de l'objet CarteTuile n'existe pas";
+        } else {
+            String code = "400";
+            String message = "L'id de l'objet CarteTuile n'existe pas";
             model.addAttribute("code", code);
             model.addAttribute("message", message);
             return "error";
@@ -87,12 +81,12 @@ public class TuileCarteController {
     @PostMapping(path = "/updateterrain")
     @ResponseBody
     public void updateTuileCarte(@RequestParam int IdTerrain,
-                                     @RequestParam int terrainNom1, HttpServletResponse httpServletResponse) {
+                                 @RequestParam int terrainNom1, HttpServletResponse httpServletResponse) {
         TuileCarte tuileCarte = tuileCarteRepository.findById(terrainNom1);
         Terrain terrain = terrainRepository.findById(IdTerrain);
         if (terrain == null) {
             HttpHeaders headers = new HttpHeaders();
-            String redirection= "/ville/affiche/"+tuileCarte.getVille().getId();
+            String redirection = "/ville/affiche/" + tuileCarte.getVille().getId();
             headers.add("Location", redirection);
             httpServletResponse.setHeader("Location", redirection);
             httpServletResponse.setStatus(400);
@@ -100,14 +94,12 @@ public class TuileCarteController {
             tuileCarte.setTerrain(terrain);
             tuileCarteRepository.save(tuileCarte);
             HttpHeaders headers = new HttpHeaders();
-            int id=tuileCarte.getVille().getId();
-            String redirection= "/ville/affiche/"+tuileCarte.getVille().getId();
+            int id = tuileCarte.getVille().getId();
+            String redirection = "/ville/affiche/" + tuileCarte.getVille().getId();
             httpServletResponse.setHeader("Location", redirection);
             httpServletResponse.setStatus(302);
         }
-
     }
-
 
     @GetMapping(path = "/error")
     public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {

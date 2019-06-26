@@ -15,20 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping(path="/simville")
+@RequestMapping(path = "/simville")
 public class AcceuilControler {
 
-
     @RequestMapping("/accueil")
-    public  String afficheAcceuil(@RequestParam(required = false)  String page, Model model) {
-        if (page!=null || page=="2#"){
+    public String afficheAcceuil(@RequestParam(required = false) String page, Model model) {
+        if (page != null || page == "2#") {
             model.addAttribute("page", page);
             return "Accueil";
-        }else {
-            page="1";
+        } else {
+            page = "1";
             model.addAttribute("page", page);
             return "Accueil";
         }
-
     }
 }

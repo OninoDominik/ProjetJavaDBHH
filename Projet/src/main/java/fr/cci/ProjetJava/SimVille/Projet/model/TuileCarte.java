@@ -137,82 +137,77 @@ public class TuileCarte {
         }
     }
 
-    public float getDMaxMax(){
-        float Dmax=this.getVille().getRivDMax();
-        if(Dmax<this.getVille().getForDMax()){
-            Dmax=this.getVille().getForDMax();
+    public float getDMaxMax() {
+        float Dmax = this.getVille().getRivDMax();
+        if (Dmax < this.getVille().getForDMax()) {
+            Dmax = this.getVille().getForDMax();
         }
-        if(Dmax<this.getVille().getForDMax()){
-            Dmax=this.getVille().getForDMax();
+        if (Dmax < this.getVille().getForDMax()) {
+            Dmax = this.getVille().getForDMax();
         }
-        if(Dmax<this.getVille().getEclDMax()){
-            Dmax=this.getVille().getEclDMax();
+        if (Dmax < this.getVille().getEclDMax()) {
+            Dmax = this.getVille().getEclDMax();
         }
-        if(Dmax<this.getVille().getEglDMax()){
-            Dmax=this.getVille().getEglDMax();
+        if (Dmax < this.getVille().getEglDMax()) {
+            Dmax = this.getVille().getEglDMax();
         }
-        if(Dmax<this.getVille().getComDMax()){
-            Dmax=this.getVille().getComDMax();
+        if (Dmax < this.getVille().getComDMax()) {
+            Dmax = this.getVille().getComDMax();
         }
-        if(Dmax<this.getVille().getPolDMax()){
-            Dmax=this.getVille().getPolDMax();
+        if (Dmax < this.getVille().getPolDMax()) {
+            Dmax = this.getVille().getPolDMax();
         }
 
         return Dmax;
     }
 
 
-
-    public int[] getBounds(int Xc, int Yc){
+    public int[] getBounds(int Xc, int Yc) {
         int Xmin, Xmax;
         int Ymin, Ymax;
 
         float Dmax = this.getDMaxMax();
 
-        if(Xc-Dmax<0){
+        if (Xc - Dmax < 0) {
             Xmin = 0;
-        }
-        else{
+        } else {
             Xmin = Math.round((Xc - Dmax));
         }
 
-        if(Xc+Dmax>this.getVille().getVilleLarg()){
+        if (Xc + Dmax > this.getVille().getVilleLarg()) {
             Xmax = this.getVille().getVilleLarg();
-        }
-        else{
+        } else {
             Xmax = Math.round((Xc + Dmax));
         }
 
-        if(Yc-Dmax<0){
+        if (Yc - Dmax < 0) {
             Ymin = 0;
-        }
-        else{
+        } else {
             Ymin = Math.round((Yc - Dmax));
         }
 
-        if(Yc+Dmax>this.getVille().getVilleLong()){
+        if (Yc + Dmax > this.getVille().getVilleLong()) {
             Ymax = this.getVille().getVilleLong();
-        }
-        else{
+        } else {
             Ymax = Math.round((Yc + Dmax));
         }
 
-        int[] tab = new int [] {Xmin,Xmax,Ymin,Ymax};
+        int[] tab = new int[]{Xmin, Xmax, Ymin, Ymax};
         return tab;
     }
 
-    public float getImpact(int Xc, int Yc){
-        float D = (float) Math.sqrt(Math.pow((this.getX()-Xc),2)+Math.pow((this.getY()-Yc),2));
+    public float getImpact(int Xc, int Yc) {
+        float D = (float) Math.sqrt(Math.pow((this.getX() - Xc), 2) + Math.pow((this.getY() - Yc), 2));
         float Dmax = this.getDMax();
 
         float P = 0.0f;
 
-        if (Dmax>=D) {
+        if (Dmax >= D) {
             //if(this.getTerrainType()== 8 && this.isNearRoad()){
             //    P = this.getBusStopImpact(Xc,Yc);
             //}
             //else{
-                P = this.getPMax() * ((Dmax - D) / Dmax);
+            P = this.getPMax() * ((Dmax - D) / Dmax);
             //}
         }
 
@@ -220,33 +215,31 @@ public class TuileCarte {
     }
 
 
-    public float getValue(List<TuileCarte> tuileList){
+    public float getValue(List<TuileCarte> tuileList) {
         int terrainType = this.getTerrain().getTerrainType();
         float Vmin = this.ville.getVilleValeurImmoMin();
         float Vmax = this.ville.getVilleValeurImmoMax();
-        float tuileValue = (Vmin+Vmax)/2;
+        float tuileValue = (Vmin + Vmax) / 2;
 
-        if(terrainType==1 || terrainType==3  || terrainType==7 ){
+        if (terrainType == 1 || terrainType == 3 || terrainType == 7) {
             //On récupère les éléments dont on a besoin pour le calcul:
             int Xc = this.getX();
             int Yc = this.getY();
             float P = 0.0f;
 
-            int Xmin = this.getBounds(Xc,Yc)[0];
-            int Xmax = this.getBounds(Xc,Yc)[1];
-            int Ymin = this.getBounds(Xc,Yc)[2];
-            int Ymax = this.getBounds(Xc,Yc)[3];
+            int Xmin = this.getBounds(Xc, Yc)[0];
+            int Xmax = this.getBounds(Xc, Yc)[1];
+            int Ymin = this.getBounds(Xc, Yc)[2];
+            int Ymax = this.getBounds(Xc, Yc)[3];
 
             //On calcule l'influence totale s'appliquant sur la tuile:
-            System.out.println("("+Xmin+";"+Xmax+") :"+P);
+
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
-                    P += (tuileList.get(x+y*this.ville.getVilleLarg())).getImpact(Xc, Yc);
-
-
+                    P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc);
                 }
             }
-            P -= tuileList.get(Xc+Yc*this.ville.getVilleLarg()).getImpact(Xc, Yc);
+            P -= tuileList.get(Xc + Yc * this.ville.getVilleLarg()).getImpact(Xc, Yc);
 
             //On vérifie que l'influence totale est comprise entre -100 et +100:
             if (P < -100) {
@@ -257,21 +250,21 @@ public class TuileCarte {
 
             //On calcule la valeur immobilière de la tuile:
             tuileValue = tuileValue + P * (Vmax - tuileValue) / 100;
-        }
-        else{
+        } else {
             tuileValue = 0.0f;
         }
         return tuileValue;
     }
+
     //METHODES NECESSAIRES POUR AFFICHER LE GRADIANT DE VALEURS IMMOBILIERES:
-    public float getInfluenceTot(List<TuileCarte> tuileList){
+    public float getInfluenceTot(List<TuileCarte> tuileList) {
         int terrainType = this.getTerrain().getTerrainType();
         float Vmin = this.ville.getVilleValeurImmoMin();
         float Vmax = this.ville.getVilleValeurImmoMax();
-        float tuileValue = (Vmin+Vmax)/2;
+        float tuileValue = (Vmin + Vmax) / 2;
         float P = 0.0f;
 
-        if(terrainType==1 || terrainType==3  || terrainType==7 ) {
+        if (terrainType == 1 || terrainType == 3 || terrainType == 7) {
             //On récupère les éléments dont on a besoin pour le calcul:
             int Xc = this.getX();
             int Yc = this.getY();
@@ -295,37 +288,32 @@ public class TuileCarte {
             } else if (P > 100) {
                 P = 100;
             }
-        }
-        else{
+        } else {
             P = -1000.0f;
         }
         return P;
     }
 
-    public String createImageUrl(float value, String nomTerrain){
+    public String createImageUrl(float value, String nomTerrain) {
         String result = "/media/tiles/";
         result += nomTerrain.toUpperCase();
 
-        int gradiantValue = ((Math.round(value) + 100)/25)+1;
-        if(gradiantValue>8){
-            gradiantValue=8;
+        int gradiantValue = ((Math.round(value) + 100) / 25) + 1;
+        if (gradiantValue > 8) {
+            gradiantValue = 8;
+        } else if (gradiantValue < 1) {
+            gradiantValue = 0;
         }
-        else if(gradiantValue<1){
-            gradiantValue=0;
-        }
-
-
-        result += "_"+gradiantValue+".png";
+        result += "_" + gradiantValue + ".png";
         return result;
     }
 
-    public List<String> createAllUrl(List<TuileCarte> tuileList){
+    public List<String> createAllUrl(List<TuileCarte> tuileList) {
         List<String> valueVille = new ArrayList<>();
-        int length = this.getVille().getVilleLong()*this.getVille().getVilleLarg();
-        for(int i=0; i<length; i++){
-            valueVille.add(createImageUrl(tuileList.get(i).getInfluenceTot(tuileList),tuileList.get(i).getTerrain().getTerrainNomShort()));
+        int length = this.getVille().getVilleLong() * this.getVille().getVilleLarg();
+        for (int i = 0; i < length; i++) {
+            valueVille.add(createImageUrl(tuileList.get(i).getInfluenceTot(tuileList), tuileList.get(i).getTerrain().getTerrainNomShort()));
         }
-
         return valueVille;
     }
 
