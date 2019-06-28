@@ -66,7 +66,7 @@ public class TuileCarteController {
         } else {
             String code = "400";
             String message = "L'id de l'objet CarteTuile n'existe pas";
-            model.addAttribute("code", code);
+            model.addAttribute("status", code);
             model.addAttribute("message", message);
             return "error";
         }
@@ -105,7 +105,7 @@ public class TuileCarteController {
     public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
         int code = response.getStatus();
         String message = HttpStatus.valueOf(code).getReasonPhrase();
-        model.addAttribute("code", code);
+        model.addAttribute("status", code);
         model.addAttribute("message", message);
         return "error";
     }

@@ -117,7 +117,7 @@ public class VilleController {
         if (tempo == null) {
             String code = "400";
             String message = "Bad request : L'id de l'objet Ville n'existe pas";
-            model.addAttribute("code", code);
+            model.addAttribute("status", code);
             model.addAttribute("message", message);
             return "error";
         }
@@ -138,7 +138,7 @@ public class VilleController {
         if (tempo == null) {
             String code = "400";
             String message = "Bad request : L'id de l'objet Ville n'existe pas";
-            model.addAttribute("code", code);
+            model.addAttribute("status", code);
             model.addAttribute("id", id);
             model.addAttribute("message", message);
 
@@ -167,7 +167,7 @@ public class VilleController {
         if (tempo == null) {
             String code = "400";
             String message = "Bad request : L'id de l'objet Ville n'existe pas";
-            model.addAttribute("code", code);
+            model.addAttribute("status", code);
             model.addAttribute("message", message);
             return "error";
         } else {
@@ -200,10 +200,11 @@ public class VilleController {
     public String afficheError(HttpServletRequest request, HttpServletResponse response, Model model) {
         int code = response.getStatus();
         String message = HttpStatus.valueOf(code).getReasonPhrase();
-        model.addAttribute("code", code);
+        model.addAttribute("status", code);
         model.addAttribute("message", message);
         return "error";
     }
+
 
     public void setCarteAleatoire(Ville Ville) {
         Random rand = new Random();
