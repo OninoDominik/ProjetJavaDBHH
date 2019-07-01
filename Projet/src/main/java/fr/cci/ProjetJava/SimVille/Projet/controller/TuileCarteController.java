@@ -79,6 +79,7 @@ public class TuileCarteController {
         if (tuileCarte != null) {
             List<TuileCarte> listTuileParVille = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
             float valeurImmo = tuileCarte.getValue(listTuileParVille);
+
             model.addAttribute("valeurImmo",  new BigDecimal(valeurImmo).toPlainString());
             model.addAttribute("tuileCarte", tuileCarte);
             return "modifT";

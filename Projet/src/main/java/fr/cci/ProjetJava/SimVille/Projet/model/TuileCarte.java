@@ -249,10 +249,20 @@ public class TuileCarte {
             }
 
             //On calcule la valeur immobilière de la tuile:
+
             tuileValue = tuileValue + P * (Vmax - tuileValue) / 100;
+if (tuileValue<Vmin)
+{
+    tuileValue=Vmin;
+}
+if(tuileValue>Vmax)
+{
+    tuileValue=Vmax;
+}
         } else {
             tuileValue = 0.0f;
         }
+
         return tuileValue;
     }
 
@@ -291,6 +301,7 @@ public class TuileCarte {
         } else {
             P = -1000.0f;
         }
+
         return P;
     }
 
