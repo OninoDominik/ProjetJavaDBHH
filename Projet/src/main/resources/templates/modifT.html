@@ -65,13 +65,13 @@
 <div class="container">
     <div class="row" style="margin-bottom: 80px">
         <div class="col-md-9" style="">
-            <h4 style="text-align: center;">Le <u style="color: #e67300">terrain  </u> actuel est
-                <img th:src="@{${tuileCarte.terrain.terrainImgUrl}}"  class="card-img-top" /> </h4>
-            <h4 style="text-align: center;"><u style="color: #e67300">Selectionner une </u>tuile pour modifier votre
-                terrain</h4><br/>
-            <h4 th:inline="text" style="text-align: center;" >
-                La valeur immobiliere du terrain est de : <u style="color: #e67300"> [[${valeurImmo}]]</u></h4>
-            <a  th:href="@{|/ville/affiche/${tuileCarte.ville.Id}|}"> <h5 style="text-align: center; margin-top: 80px; margin-bottom: 70px" th:inline="text" >
+            <h6 style="text-align: center;">Le <u style="color: #e67300">terrain  </u> actuel est
+                <img th:src="@{${tuileCarte.terrain.terrainImgUrl}}"  class="card-img-top" /> </h6>
+            <h6 style="text-align: center;"><u style="color: #e67300">Selectionner une </u>tuile pour modifier votre
+                terrain</h6><br/>
+            <h6 th:inline="text" style="text-align: center;" >
+                La valeur immobiliere du terrain est de : <u style="color: #e67300"> [[${valeurImmo}]]</u></h6>
+            <a  th:href="@{|/ville/affiche/${tuileCarte.ville.Id}|}"> <h5 style="text-align: center; margin-top: 10px; margin-bottom: 10px" th:inline="text" >
                 Revenir a la carte sans modifier le terrain </h5> </a>
             <form class="well form-horizontal" action="/tuilecarte/updateterrain" method="POST">
 
