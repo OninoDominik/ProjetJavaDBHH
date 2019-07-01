@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import fr.cci.ProjetJava.SimVille.Projet.model.Ville;
 import fr.cci.ProjetJava.SimVille.Projet.model.repository.VilleRepository;
+
+import java.math.BigDecimal;
 import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -126,9 +128,12 @@ public class VilleController {
         int taille = ((tempo.getVilleLarg()+1) * 100);
         String tailletoString = Integer.toString(taille);
         tailletoString += "px";
-        System.out.println(tailletoString);
         model.addAttribute("taille", tailletoString);
         model.addAttribute("produits", TuileCarte);
+        String valeurImmoMin = new BigDecimal(((List<fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte>) TuileCarte).get(0).getVille().getVilleValeurImmoMin()).toPlainString();
+        String valeurImmoMax = new BigDecimal(((List<fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte>) TuileCarte).get(0).getVille().getVilleValeurImmoMax()).toPlainString();
+        model.addAttribute("valeurImmoMax", valeurImmoMax);
+        model.addAttribute("valeurImmoMin", valeurImmoMin);
         return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
     }
 
@@ -153,10 +158,14 @@ public class VilleController {
             int taille = ((tempo.getVilleLarg()+1) * 100);
             String tailletoString = Integer.toString(taille);
             tailletoString += "px";
-            System.out.println(tailletoString);
+
             model.addAttribute("taille", tailletoString);
             model.addAttribute("Listeurl", ListeUrl);
             model.addAttribute("ville", tempo);
+            String valeurImmoMin = new BigDecimal(((List<fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte>) TuileCarte).get(0).getVille().getVilleValeurImmoMin()).toPlainString();
+            String valeurImmoMax = new BigDecimal(((List<fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte>) TuileCarte).get(0).getVille().getVilleValeurImmoMax()).toPlainString();
+            model.addAttribute("valeurImmoMax", valeurImmoMax);
+            model.addAttribute("valeurImmoMin", valeurImmoMin);
             return "cartedegrade";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
 
         }
@@ -177,8 +186,14 @@ public class VilleController {
             int taille = ((tempo.getVilleLarg()+1) * 100);
             String tailletoString = Integer.toString(taille);
             tailletoString += "px";
+            String valeurImmoMin = new BigDecimal(((List<fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte>) TuileCarte).get(0).getVille().getVilleValeurImmoMin()).toPlainString();
+            String valeurImmoMax = new BigDecimal(((List<fr.cci.ProjetJava.SimVille.Projet.model.TuileCarte>) TuileCarte).get(0).getVille().getVilleValeurImmoMax()).toPlainString();
+            model.addAttribute("valeurImmoMax", valeurImmoMax);
+            model.addAttribute("valeurImmoMin", valeurImmoMin);
             model.addAttribute("taille", tailletoString);
             model.addAttribute("produits", TuileCarte);
+
+
             return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
         }
     }

@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class TuileCarteController {
         if (tuileCarte != null) {
             List<TuileCarte> listTuileParVille = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
             float valeurImmo = tuileCarte.getValue(listTuileParVille);
-            model.addAttribute("valeurImmo", valeurImmo);
+            model.addAttribute("valeurImmo", new BigDecimal(valeurImmo).toPlainString());
             model.addAttribute("tuileCarte", tuileCarte);
             return "modifT";
         } else {
@@ -78,7 +79,7 @@ public class TuileCarteController {
         if (tuileCarte != null) {
             List<TuileCarte> listTuileParVille = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
             float valeurImmo = tuileCarte.getValue(listTuileParVille);
-            model.addAttribute("valeurImmo", valeurImmo);
+            model.addAttribute("valeurImmo",  new BigDecimal(valeurImmo).toPlainString());
             model.addAttribute("tuileCarte", tuileCarte);
             return "modifT";
         } else {
