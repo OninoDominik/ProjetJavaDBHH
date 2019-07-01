@@ -123,9 +123,10 @@ public class VilleController {
         }
         Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
 
-        int taille = (tempo.getVilleLarg() * 100);
+        int taille = ((tempo.getVilleLarg()+1) * 100);
         String tailletoString = Integer.toString(taille);
         tailletoString += "px";
+        System.out.println(tailletoString);
         model.addAttribute("taille", tailletoString);
         model.addAttribute("produits", TuileCarte);
         return "Carte";  // on utilise thymeleaf -> retourne al page Accueil.html du dossier ressources
@@ -149,9 +150,10 @@ public class VilleController {
             List<TuileCarte> TuileCarte3 = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
             TuileCarte tuileCarte2 = TuileCarte3.get(0);
             List<String> ListeUrl = tuileCarte2.createAllUrl(TuileCarte3);
-            int taille = (tempo.getVilleLarg() * 100);
+            int taille = ((tempo.getVilleLarg()+1) * 100);
             String tailletoString = Integer.toString(taille);
             tailletoString += "px";
+            System.out.println(tailletoString);
             model.addAttribute("taille", tailletoString);
             model.addAttribute("Listeurl", ListeUrl);
             model.addAttribute("ville", tempo);
@@ -172,7 +174,7 @@ public class VilleController {
             return "error";
         } else {
             Iterable<TuileCarte> TuileCarte = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tempo);
-            int taille = (tempo.getVilleLarg() * 100);
+            int taille = ((tempo.getVilleLarg()+1) * 100);
             String tailletoString = Integer.toString(taille);
             tailletoString += "px";
             model.addAttribute("taille", tailletoString);

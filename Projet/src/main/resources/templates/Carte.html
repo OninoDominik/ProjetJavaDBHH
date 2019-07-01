@@ -58,19 +58,33 @@
 
 
     <div th:style="|width: ${taille}|">
-        <div th:each="product : ${produits}"  style="float: left; width: 100px ">
+        <h5 style="float: left; width: 100px; height: 100px;" th:each="i : ${#numbers.sequence( 0, produits[0].ville.villeLarg, 1)}">
+            [[${ i }]]
+        </h5>
+        <div style="float: left;" th:each="i : ${#numbers.sequence( 0, produits[0].ville.villeLarg*produits[0].ville.villeLong-1, 1)}">
+            <div style="float: left; width: 100px; height: 100px;" th:if="${i%(produits[0].ville.villeLarg) == 0}"th:with="result=${ (i /produits[0].ville.villeLarg)+1}"><h5 th:text="${result}"></h5></div>
+            <a th:href="@{|/tuilecarte/detail/${produits[i].id}|}" >
+            <img th:src="@{${produits[i].terrain.terrainImgUrl}}"  class="card-img-top" />
+        </a>
+        </div>
+    </div>
+<!--
+        <span th:each="product : ${produits}"  style="float: left; width: 100px; height: 100px;">
+            <div th:if="${product.tuileCarteposition == 0}" >
+                <h5>test2</h5>
+            </div>
             <a th:href="@{|/tuilecarte/detail/${product.id}|}" >
                 <img th:src="@{${product.terrain.terrainImgUrl}}"  class="card-img-top" />
             </a>
-        </div>
+        </span>
     </div>
-
+-->
 </div>
 
 <!-- footer -->
 <div id="copyrights">
    <div class="container">
-     <div class="credits">      
+     <div class="credits">
        <div class="row">
                    <div class="col-lg-2 col-md-10 col-sm-12">
                           <h5>Information</h5><br>
@@ -88,8 +102,8 @@
                         <p>Dominik GROBECKER</p>
                        <p>Haider SHATI</p>
                        <p>Hugor MAYAMBU</a>
-                       <p>Murat COLAK</p>                     
-                     </ul>                          
+                       <p>Murat COLAK</p>
+                     </ul>
                    </div>
                          <div class="col-lg-3 col-md-9 col-sm-12">
                            <h5>Contact us</h5><br>
