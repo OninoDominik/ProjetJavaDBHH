@@ -18,4 +18,5 @@ public interface TuileCarteRepository extends JpaRepository<TuileCarte, Integer>
     TuileCarte findById(int id);
 
     TuileCarte findByTuileCarteposition(int position);
+    TuileCarte findByVilleAndTuileCarteposition(Ville ville,int position);
 }

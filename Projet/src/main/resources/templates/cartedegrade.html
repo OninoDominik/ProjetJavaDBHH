@@ -63,7 +63,7 @@
         </h5>
         <div style="float: left;" th:each="i : ${#numbers.sequence( 0, ville.villeLarg*ville.villeLong-1, 1)}">
             <div style="float: left; width: 100px; height: 100px;" th:if="${i%(ville.villeLarg) == 0}"th:with="result=${ (i /ville.villeLarg)+1}"><h5 th:text="${result}"></h5></div>
-            <a href="#" >
+            <a th:href="@{|/tuilecarte/villeidetposition/${ville.Id}/${i}|}" >
                 <img th:src="@{${Listeurl[i]}}"  class="card-img-top" />
             </a>
         </div>

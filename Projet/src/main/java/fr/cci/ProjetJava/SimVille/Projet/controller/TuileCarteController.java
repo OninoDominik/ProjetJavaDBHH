@@ -71,6 +71,24 @@ public class TuileCarteController {
             return "error";
         }
     }
+    @GetMapping(path = "/villeidetposition/{villeId}/{position}")
+    public String afficheCarteEnFonctionDePosition(@PathVariable int villeId,@PathVariable int position, Model model) {
+        Ville ville= villeRepository.findById(villeId);
+        TuileCarte tuileCarte = tuileCarteRepository.findByVilleAndTuileCarteposition(ville,position);
+        if (tuileCarte != null) {
+            List<TuileCarte> listTuileParVille = tuileCarteRepository.findByVilleOrderByTuileCarteposition(tuileCarte.getVille());
+            float valeurImmo = tuileCarte.getValue(listTuileParVille);
+            model.addAttribute("valeurImmo", valeurImmo);
+            model.addAttribute("tuileCarte", tuileCarte);
+            return "modifT";
+        } else {
+            String code = "400";
+            String message = "L'id de l'objet CarteTuile n'existe pas";
+            model.addAttribute("status", code);
+            model.addAttribute("message", message);
+            return "error";
+        }
+    }
 
     @GetMapping(path = "/all")
     public @ResponseBody
