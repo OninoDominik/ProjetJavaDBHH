@@ -207,6 +207,34 @@ public class TuileCarte {
         return P;
     }
 
+    public int[][] createRoadMap(int Xc, int Yc, List<TuileCarte> tuileList){
+        int Xmin = this.getBounds(Xc, Yc)[0];
+        int Xmax = this.getBounds(Xc, Yc)[1];
+        int Ymin = this.getBounds(Xc, Yc)[2];
+        int Ymax = this.getBounds(Xc, Yc)[3];
+
+        //CHECK BOUNDS!!!!
+        int[][] roadMap = new int[Xmax+1][Ymax+1];
+
+        for (int x = Xmin; x < Xmax; x++) {
+            for (int y = Ymin; y < Ymax; y++) {
+                // SI Arret = 2
+                if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 8){
+                    roadMap[x][y] = 2;
+                }
+                // SI Route = 1
+                else if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 9 ){
+                    roadMap[x][y] = 1;
+                }
+                // SINON = 0
+                else{
+                    roadMap[x][y] = 0;
+                }
+            }
+        }
+        return roadMap;
+    }
+
     public boolean isNearRoad(int Xc, int Yc, List<TuileCarte> tuileList) {
         int X = this.getX(), Y = this.getY();
         int[] bounds = this.getBounds(Xc,Yc);
@@ -274,8 +302,11 @@ public class TuileCarte {
             int Ymin = this.getBounds(Xc, Yc)[2];
             int Ymax = this.getBounds(Xc, Yc)[3];
 
-            //On calcule l'influence totale s'appliquant sur la tuile:
 
+            int[][] roadMap = this.createRoadMap(Xc, Yc, tuileList);
+
+
+            //On calcule l'influence totale s'appliquant sur la tuile:
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
                     P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc, tuileList);
