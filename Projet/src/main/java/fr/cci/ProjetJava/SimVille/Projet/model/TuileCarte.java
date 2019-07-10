@@ -196,19 +196,61 @@ public class TuileCarte {
         return tab;
     }
 
-    public float getImpact(int Xc, int Yc) {
+    public float getPoliceImpact(int Xc, int Yc, float D, float Dmax){
+        float P = 0.0f;
+        if(D <= 0.3*Dmax){
+            P = this.getPMax() * ((Dmax - D) / Dmax);
+        }
+        else{
+            P = -this.getPMax() * ((Dmax - D) / Dmax);
+        }
+        return P;
+    }
+
+    public boolean isNearRoad(int Xc, int Yc, List<TuileCarte> tuileList) {
+        int X = this.getX(), Y = this.getY();
+        int[] bounds = this.getBounds(Xc,Yc);
+
+        if ((X - 1) >= bounds[0] && tuileList.get((X-1)+ Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
+            return true;
+        }
+
+        if ((X + 1) < +bounds[1] && tuileList.get((X+1) + Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
+            return true;
+        }
+
+        if ((Y - 1) >= bounds[2] && tuileList.get(X + (Y-1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9) {
+            return true;
+        }
+
+        if ((Y + 1) <= bounds[3] && tuileList.get(X + (Y+1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9){
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+    public float getBusStopImpact(int Xc, int Yc){
+        return 0.0f;
+    }
+
+
+    public float getImpact(int Xc, int Yc, List<TuileCarte> tuileList) {
         float D = (float) Math.sqrt(Math.pow((this.getX() - Xc), 2) + Math.pow((this.getY() - Yc), 2));
         float Dmax = this.getDMax();
 
         float P = 0.0f;
 
         if (Dmax >= D) {
-            //if(this.getTerrainType()== 8 && this.isNearRoad()){
-            //    P = this.getBusStopImpact(Xc,Yc);
-            //}
-            //else{
-            P = this.getPMax() * ((Dmax - D) / Dmax);
-            //}
+            if (this.getTerrain().getTerrainType() == 8 && this.isNearRoad(Xc,Yc, tuileList)){
+                P = this.getBusStopImpact(Xc, Yc);
+            } else if (this.getTerrain().getTerrainType() == 6 ) {
+                P = this.getPoliceImpact(Xc, Yc, D, Dmax);
+            } else {
+                P = this.getPMax() * ((Dmax - D) / Dmax);
+            }
         }
 
         return P;
@@ -236,10 +278,10 @@ public class TuileCarte {
 
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
-                    P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc);
+                    P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc, tuileList);
                 }
             }
-            P -= tuileList.get(Xc + Yc * this.ville.getVilleLarg()).getImpact(Xc, Yc);
+            P -= tuileList.get(Xc + Yc * this.ville.getVilleLarg()).getImpact(Xc, Yc, tuileList);
 
             //On vérifie que l'influence totale est comprise entre -100 et +100:
             if (P < -100) {
@@ -251,14 +293,12 @@ public class TuileCarte {
             //On calcule la valeur immobilière de la tuile:
 
             tuileValue = tuileValue + P * (Vmax - tuileValue) / 100;
-if (tuileValue<Vmin)
-{
-    tuileValue=Vmin;
-}
-if(tuileValue>Vmax)
-{
-    tuileValue=Vmax;
-}
+            if (tuileValue < Vmin) {
+                tuileValue = Vmin;
+            }
+            if (tuileValue > Vmax) {
+                tuileValue = Vmax;
+            }
         } else {
             tuileValue = 0.0f;
         }
@@ -287,10 +327,10 @@ if(tuileValue>Vmax)
             //On calcule l'influence totale s'appliquant sur la tuile:
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
-                    P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc);
+                    P += (tuileList.get(x + y * this.ville.getVilleLarg())).getImpact(Xc, Yc, tuileList);
                 }
             }
-            P -= tuileList.get(Xc + Yc * this.ville.getVilleLarg()).getImpact(Xc, Yc);
+            P -= tuileList.get(Xc + Yc * this.ville.getVilleLarg()).getImpact(Xc, Yc, tuileList);
 
             //On vérifie que l'influence totale est comprise entre -100 et +100:
             if (P < -100) {
