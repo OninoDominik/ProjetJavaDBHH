@@ -5,8 +5,7 @@ import fr.cci.ProjetJava.SimVille.Projet.model.repository.TuileCarteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class TuileCarte {
@@ -207,51 +206,69 @@ public class TuileCarte {
         return P;
     }
 
-    public int[][] createRoadMap(int Xc, int Yc, List<TuileCarte> tuileList){
+    public Maze createRoadMap(int Xc, int Yc, List<TuileCarte> tuileList){
         int Xmin = this.getBounds(Xc, Yc)[0];
         int Xmax = this.getBounds(Xc, Yc)[1];
         int Ymin = this.getBounds(Xc, Yc)[2];
         int Ymax = this.getBounds(Xc, Yc)[3];
 
         //CHECK BOUNDS!!!!
-        int[][] roadMap = new int[Xmax+1][Ymax+1];
+        int[][] map = new int[Xmax+1][Ymax+1];
 
         for (int x = Xmin; x < Xmax; x++) {
             for (int y = Ymin; y < Ymax; y++) {
-                // SI Arret = 2
-                if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 8){
-                    roadMap[x][y] = 2;
+                // SI "sortie" = 3
+                if (x == Xc && y == Yc){
+                    map[x][y] = 3;
                 }
-                // SI Route = 1
+                // SI "entrée" = 2
+                else if (x == this.getX() && y == this.getY()){
+                    map[x][y] = 2;
+                }
+                // SI Arret = 0
+                else if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 8){
+                    map[x][y] = 0;
+                }
+                // SI Route = 0
                 else if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 9 ){
-                    roadMap[x][y] = 1;
+                    map[x][y] = 0;
                 }
-                // SINON = 0
+                // SINON = 1
                 else{
-                    roadMap[x][y] = 0;
+                    map[x][y] = 1;
                 }
             }
         }
+
+        Maze roadMap = new Maze(map, new Coordinate(Xc,Yc) ,new Coordinate(this.getX(),this.getY()));
+
         return roadMap;
     }
 
     public boolean isNearRoad(int Xc, int Yc, List<TuileCarte> tuileList) {
         int X = this.getX(), Y = this.getY();
-        int[] bounds = this.getBounds(Xc,Yc);
 
-        if ((X - 1) >= bounds[0] && tuileList.get((X-1)+ Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
+        /*
+        System.out.println(this.getTuileCarteposition());
+        System.out.println("X: "+this.getX());
+        System.out.println("Y: "+this.getY());
+        System.out.println("VilleLarg: "+this.getVille().getVilleLarg());
+        System.out.println("VilleLong: "+this.getVille().getVilleLong());
+        */
+
+        if ((X - 1) >= 0 && tuileList.get((X-1)+ Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
             return true;
         }
 
-        if ((X + 1) < +bounds[1] && tuileList.get((X+1) + Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
+        if ((X + 1) <= (this.getVille().getVilleLarg()-1) && tuileList.get((X+1) + Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
             return true;
         }
 
-        if ((Y - 1) >= bounds[2] && tuileList.get(X + (Y-1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9) {
+        if ((Y - 1) >= 0 && tuileList.get(X + (Y-1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9) {
             return true;
         }
 
-        if ((Y + 1) <= bounds[3] && tuileList.get(X + (Y+1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9){
+        if ((Y + 1) <= (this.getVille().getVilleLong()-1) && tuileList.get(X + (Y+1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9){
             return true;
         }
 
@@ -259,9 +276,24 @@ public class TuileCarte {
     }
 
 
+    public float getBusStopImpact(int Xc, int Yc, Maze roadMap){
+        int X = this.getX();
+        int Y = this.getY();
+        float D = (float) Math.sqrt(Math.pow((X - Xc), 2) + Math.pow((Y - Yc), 2));
+        float Dmax = this.getDMax();
 
-    public float getBusStopImpact(int Xc, int Yc){
-        return 0.0f;
+        float P = 0.0f;
+
+        if (D <= Dmax) {
+            BFSMazeSolver bfs = new BFSMazeSolver();
+            List<Coordinate> path = bfs.solve(roadMap);
+            float distance = path.size();
+            if(distance <= Dmax){
+                P = this.getPMax() * ((Dmax - distance) / Dmax);
+            }
+        }
+
+        return P;
     }
 
 
@@ -272,8 +304,9 @@ public class TuileCarte {
         float P = 0.0f;
 
         if (Dmax >= D) {
-            if (this.getTerrain().getTerrainType() == 8 && this.isNearRoad(Xc,Yc, tuileList)){
-                P = this.getBusStopImpact(Xc, Yc);
+            //SI arret de bus = 0 car fait à part
+            if (this.getTerrain().getTerrainType() == 8 ){
+                P = 0.0f;
             } else if (this.getTerrain().getTerrainType() == 6 ) {
                 P = this.getPoliceImpact(Xc, Yc, D, Dmax);
             } else {
@@ -302,9 +335,18 @@ public class TuileCarte {
             int Ymin = this.getBounds(Xc, Yc)[2];
             int Ymax = this.getBounds(Xc, Yc)[3];
 
-
-            int[][] roadMap = this.createRoadMap(Xc, Yc, tuileList);
-
+            //On calcule l'influence des arrêts de bus, si la tuile est prêt d'une route
+            if(this.isNearRoad(Xc, Yc, tuileList)){
+                Maze roadMap = this.createRoadMap(Xc, Yc, tuileList);
+                for (int x = Xmin; x < Xmax; x++) {
+                    for (int y = Ymin; y < Ymax; y++) {
+                        if(tuileList.get(x + y * this.ville.getVilleLarg()).getTerrain().getTerrainType()==8
+                        && tuileList.get(x + y * this.ville.getVilleLarg()).isNearRoad(Xc,Yc,tuileList)) {
+                            P += (tuileList.get(x + y * this.ville.getVilleLarg())).getBusStopImpact(Xc, Yc, roadMap);
+                        }
+                    }
+                }
+            }
 
             //On calcule l'influence totale s'appliquant sur la tuile:
             for (int x = Xmin; x < Xmax; x++) {
@@ -355,6 +397,11 @@ public class TuileCarte {
             int Ymin = this.getBounds(Xc, Yc)[2];
             int Ymax = this.getBounds(Xc, Yc)[3];
 
+            Maze roadMap = this.createRoadMap(Xc, Yc, tuileList);
+
+            
+
+
             //On calcule l'influence totale s'appliquant sur la tuile:
             for (int x = Xmin; x < Xmax; x++) {
                 for (int y = Ymin; y < Ymax; y++) {
@@ -398,6 +445,166 @@ public class TuileCarte {
         }
         return valueVille;
     }
+
+
+
+    //CHEMIN LE PLUS COURT:
+
+    // Details algo de chemin le plus court:
+
+    //Définition d'un objet Coordinate:
+    public class Coordinate {
+        int x;
+        int y;
+        Coordinate parent;
+
+        public Coordinate(int x, int y) {
+            this.x = x;
+            this.y = y;
+            this.parent = null;
+        }
+
+        public Coordinate(int x, int y, Coordinate parent) {
+            this.x = x;
+            this.y = y;
+            this.parent = parent;
+        }
+
+        int getX() {
+            return x;
+        }
+
+        int getY() {
+            return y;
+        }
+
+        Coordinate getParent() {
+            return parent;
+        }
+    }
+
+    //Définition de l'objet Maze:
+    public class Maze {
+        private static final int ROAD = 0;
+        private static final int WALL = 1;
+        private static final int START = 2;
+        private static final int EXIT = 3;
+        private static final int PATH = 4;
+
+        private int[][] maze;
+        private boolean[][] visited;
+        private Coordinate start;
+        private Coordinate end;
+
+        public Maze(int[][] map, Coordinate start, Coordinate end){
+            this.maze = map;
+            this.visited = new boolean[this.getHeight()][this.getWidth()];
+            this.start = start;
+            this.end = end;
+        }
+
+        public int getHeight() {
+            return maze.length;
+        }
+
+        public int getWidth() {
+            return maze[0].length;
+        }
+
+        public Coordinate getEntry() {
+            return start;
+        }
+
+        public Coordinate getExit() {
+            return end;
+        }
+
+        public boolean isExit(int x, int y) {
+            return x == end.getX() && y == end.getY();
+        }
+
+        public boolean isStart(int x, int y) {
+            return x == start.getX() && y == start.getY();
+        }
+
+        public boolean isExplored(int row, int col) {
+            return visited[row][col];
+        }
+
+        public boolean isWall(int row, int col) {
+            return maze[row][col] == WALL;
+        }
+
+        public void setVisited(int row, int col, boolean value) {
+            visited[row][col] = value;
+        }
+
+        public boolean isValidLocation(int row, int col) {
+            if (row < 0 || row >= getHeight() || col < 0 || col >= getWidth()) {
+                return false;
+            }
+            return true;
+        }
+
+        public void reset() {
+            for (int i = 0; i < visited.length; i++)
+                Arrays.fill(visited[i], false);
+        }
+    }
+
+    //Definition de l'objet MazeSolver:
+    public class BFSMazeSolver {
+        private final int[][] DIRECTIONS = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+
+        public List<Coordinate> solve(Maze maze) {
+            LinkedList<Coordinate> nextToVisit = new LinkedList<>();
+            Coordinate start = maze.getEntry();
+            nextToVisit.add(start);
+
+            while (!nextToVisit.isEmpty()) {
+                Coordinate cur = nextToVisit.remove();
+
+                if (!maze.isValidLocation(cur.getX(), cur.getY()) || maze.isExplored(cur.getX(), cur.getY())) {
+                    continue;
+                }
+
+                if (maze.isWall(cur.getX(), cur.getY())) {
+                    maze.setVisited(cur.getX(), cur.getY(), true);
+                    continue;
+                }
+
+                if (maze.isExit(cur.getX(), cur.getY())) {
+                    return backtrackPath(cur);
+                }
+
+                for (int[] direction : DIRECTIONS) {
+                    Coordinate coordinate = new Coordinate(cur.getX() + direction[0], cur.getY() + direction[1], cur);
+                    nextToVisit.add(coordinate);
+                    maze.setVisited(cur.getX(), cur.getY(), true);
+                }
+            }
+            return Collections.emptyList();
+        }
+
+        private List<Coordinate> backtrackPath(Coordinate cur) {
+            List<Coordinate> path = new ArrayList<>();
+            Coordinate iter = cur;
+
+            while (iter != null) {
+                path.add(iter);
+                iter = iter.parent;
+            }
+
+            return path;
+        }
+    }
+
+
+
+
+
+
+
 
 
 }
