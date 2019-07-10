@@ -108,8 +108,8 @@ public class TuileCarte {
                 return this.getVille().getEglDMax();
             case 6:
                 return this.getVille().getPolDMax();
-            //case 8:
-            //    return this.getVille().getRtbDMax();
+            case 8:
+                return this.getVille().getRtbDMax();
             default:
                 return 1.0f;
         }
@@ -129,8 +129,8 @@ public class TuileCarte {
                 return this.getVille().getEglPMax();
             case 6:
                 return this.getVille().getPolPMax();
-            //case 8:
-            //    return this.getVille().getRtbPMax();
+            case 8:
+               return this.getVille().getRtbPMax();
             default:
                 return 0.0f;
         }
@@ -206,69 +206,119 @@ public class TuileCarte {
         return P;
     }
 
-    public Maze createRoadMap(int Xc, int Yc, List<TuileCarte> tuileList){
-        int Xmin = this.getBounds(Xc, Yc)[0];
-        int Xmax = this.getBounds(Xc, Yc)[1];
-        int Ymin = this.getBounds(Xc, Yc)[2];
-        int Ymax = this.getBounds(Xc, Yc)[3];
+    //*************************************************************************************
+    //*************************************************************************************
+
+    public int[][] createRoadMap(int Xc, int Yc, List<TuileCarte> tuileList){
+        int Xmin = 0;
+        int Xmax = this.getVille().getVilleLarg();
+        int Ymin = 0;
+        int Ymax = this.getVille().getVilleLong();
 
         //CHECK BOUNDS!!!!
-        int[][] map = new int[Xmax+1][Ymax+1];
+        int[][] roadMap = new int[Xmax][Ymax];
 
         for (int x = Xmin; x < Xmax; x++) {
             for (int y = Ymin; y < Ymax; y++) {
-                // SI "sortie" = 3
+                // SI "sortie" = 1
                 if (x == Xc && y == Yc){
-                    map[x][y] = 3;
+                    roadMap[x][y] = 1;
                 }
-                // SI "entrée" = 2
-                else if (x == this.getX() && y == this.getY()){
-                    map[x][y] = 2;
-                }
-                // SI Arret = 0
+                // SI Arret = 1
                 else if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 8){
-                    map[x][y] = 0;
+                    roadMap[x][y] = 1;
                 }
-                // SI Route = 0
+                // SI Route = 1
                 else if((tuileList.get(x + y * this.ville.getVilleLarg())).getTerrain().getTerrainType()== 9 ){
-                    map[x][y] = 0;
+                    roadMap[x][y] = 1;
                 }
-                // SINON = 1
+                // SINON = 0
                 else{
-                    map[x][y] = 1;
+                    roadMap[x][y] = 0;
                 }
             }
         }
 
-        Maze roadMap = new Maze(map, new Coordinate(Xc,Yc) ,new Coordinate(this.getX(),this.getY()));
-
         return roadMap;
     }
+
+
+    public int findShortestPath(int[][] roadMap, int[][] visited,
+                                int i, int j, int x, int y, int min_dist, int dist){
+
+        // if destination is found, update min_dist
+        if (i == x && j == y)
+        {
+            return Integer.min(dist, min_dist);
+        }
+
+        // set (i, j) cell as visited
+        visited[i][j] = 1;
+
+        // go to bottom cell
+        if (isValid(i + 1, j) && isSafe(roadMap, visited, i + 1, j)) {
+            min_dist = findShortestPath(roadMap, visited, i + 1, j, x, y,
+                    min_dist, dist + 1);
+        }
+
+        // go to right cell
+        if (isValid(i, j + 1) && isSafe(roadMap, visited, i, j + 1)) {
+            min_dist = findShortestPath(roadMap, visited, i, j + 1, x, y,
+                    min_dist, dist + 1);
+        }
+
+        // go to top cell
+        if (isValid(i - 1, j) && isSafe(roadMap, visited, i - 1, j)) {
+            min_dist = findShortestPath(roadMap, visited, i - 1, j, x, y,
+                    min_dist, dist + 1);
+        }
+
+        // go to left cell
+        if (isValid(i, j - 1) && isSafe(roadMap, visited, i, j - 1)) {
+            min_dist = findShortestPath(roadMap, visited, i, j - 1, x, y,
+                    min_dist, dist + 1);
+        }
+
+        // Backtrack - Remove (i, j) from visited matrix
+        visited[i][j] = 0;
+
+        return min_dist;
+    }
+
+    private boolean isSafe(int[][] roadMap, int[][] visited, int x, int y)
+    {
+        return !(roadMap[x][y] == 0 || visited[x][y] != 0);
+    }
+
+    private boolean isValid(int x, int y)
+    {
+        return (x < this.getVille().getVilleLarg() && y < this.getVille().getVilleLong() && x >= 0 && y >= 0);
+    }
+
+    //*************************************************************************************
+    //*************************************************************************************
 
     public boolean isNearRoad(int Xc, int Yc, List<TuileCarte> tuileList) {
         int X = this.getX(), Y = this.getY();
 
-        /*
-        System.out.println(this.getTuileCarteposition());
-        System.out.println("X: "+this.getX());
-        System.out.println("Y: "+this.getY());
-        System.out.println("VilleLarg: "+this.getVille().getVilleLarg());
-        System.out.println("VilleLong: "+this.getVille().getVilleLong());
-        */
-
-        if ((X - 1) >= 0 && tuileList.get((X-1)+ Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
+        if ((X - 1) >= 0 && (tuileList.get((X-1)+ Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9
+                         ||  tuileList.get((X-1)+ Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 8)) {
             return true;
         }
 
-        if ((X + 1) <= (this.getVille().getVilleLarg()-1) && tuileList.get((X+1) + Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9) {
+        if ((X + 1) <= (this.getVille().getVilleLarg()-1) && (tuileList.get((X+1) + Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9
+                                                          || tuileList.get((X+1) + Y * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 8)){
             return true;
         }
 
-        if ((Y - 1) >= 0 && tuileList.get(X + (Y-1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9) {
+        if ((Y - 1) >= 0 && (tuileList.get(X + (Y-1) * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9
+                         || tuileList.get(X + (Y-1) * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 8)){
             return true;
         }
 
-        if ((Y + 1) <= (this.getVille().getVilleLong()-1) && tuileList.get(X + (Y+1) * this.ville.getVilleLarg()-1).getTerrain().getTerrainType() == 9){
+
+        if ((Y + 1) <= (this.getVille().getVilleLong()-1) && (tuileList.get(X + (Y+1) * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 9
+                                                          || tuileList.get(X + (Y+1) * this.ville.getVilleLarg()).getTerrain().getTerrainType() == 8)){
             return true;
         }
 
@@ -276,7 +326,7 @@ public class TuileCarte {
     }
 
 
-    public float getBusStopImpact(int Xc, int Yc, Maze roadMap){
+    public float getBusStopImpact(int Xc, int Yc, int[][] roadMap){
         int X = this.getX();
         int Y = this.getY();
         float D = (float) Math.sqrt(Math.pow((X - Xc), 2) + Math.pow((Y - Yc), 2));
@@ -285,12 +335,9 @@ public class TuileCarte {
         float P = 0.0f;
 
         if (D <= Dmax) {
-            BFSMazeSolver bfs = new BFSMazeSolver();
-            List<Coordinate> path = bfs.solve(roadMap);
-            float distance = path.size();
-            if(distance <= Dmax){
-                P = this.getPMax() * ((Dmax - distance) / Dmax);
-            }
+            int[][] visited = new int[roadMap.length][roadMap[0].length];
+            int distMin = this.findShortestPath(roadMap, visited, X, Y, Xc, Yc, Integer.MAX_VALUE, 0);
+            P = this.getPMax() * ((Dmax - distMin) / Dmax);
         }
 
         return P;
@@ -336,12 +383,11 @@ public class TuileCarte {
             int Ymax = this.getBounds(Xc, Yc)[3];
 
             //On calcule l'influence des arrêts de bus, si la tuile est prêt d'une route
-            if(this.isNearRoad(Xc, Yc, tuileList)){
-                Maze roadMap = this.createRoadMap(Xc, Yc, tuileList);
+            if(this.getTerrain().getTerrainType() == 8 || this.isNearRoad(Xc, Yc, tuileList)){
+                int[][] roadMap = this.createRoadMap(Xc, Yc, tuileList);
                 for (int x = Xmin; x < Xmax; x++) {
                     for (int y = Ymin; y < Ymax; y++) {
-                        if(tuileList.get(x + y * this.ville.getVilleLarg()).getTerrain().getTerrainType()==8
-                        && tuileList.get(x + y * this.ville.getVilleLarg()).isNearRoad(Xc,Yc,tuileList)) {
+                        if(tuileList.get(x + y * this.ville.getVilleLarg()).getTerrain().getTerrainType()==8) {
                             P += (tuileList.get(x + y * this.ville.getVilleLarg())).getBusStopImpact(Xc, Yc, roadMap);
                         }
                     }
@@ -397,10 +443,18 @@ public class TuileCarte {
             int Ymin = this.getBounds(Xc, Yc)[2];
             int Ymax = this.getBounds(Xc, Yc)[3];
 
-            Maze roadMap = this.createRoadMap(Xc, Yc, tuileList);
-
-            
-
+            // Calcul influence arrets de bus:
+            if(this.isNearRoad(Xc, Yc, tuileList)){
+                int[][] roadMap = this.createRoadMap(Xc, Yc, tuileList);
+                for (int x = Xmin; x < Xmax; x++) {
+                    for (int y = Ymin; y < Ymax; y++) {
+                        if(tuileList.get(x + y * this.ville.getVilleLarg()).getTerrain().getTerrainType()==8
+                                && tuileList.get(x + y * this.ville.getVilleLarg()).isNearRoad(Xc,Yc,tuileList)) {
+                            P += (tuileList.get(x + y * this.ville.getVilleLarg())).getBusStopImpact(Xc, Yc, roadMap);
+                        }
+                    }
+                }
+            }
 
             //On calcule l'influence totale s'appliquant sur la tuile:
             for (int x = Xmin; x < Xmax; x++) {
@@ -451,154 +505,6 @@ public class TuileCarte {
     //CHEMIN LE PLUS COURT:
 
     // Details algo de chemin le plus court:
-
-    //Définition d'un objet Coordinate:
-    public class Coordinate {
-        int x;
-        int y;
-        Coordinate parent;
-
-        public Coordinate(int x, int y) {
-            this.x = x;
-            this.y = y;
-            this.parent = null;
-        }
-
-        public Coordinate(int x, int y, Coordinate parent) {
-            this.x = x;
-            this.y = y;
-            this.parent = parent;
-        }
-
-        int getX() {
-            return x;
-        }
-
-        int getY() {
-            return y;
-        }
-
-        Coordinate getParent() {
-            return parent;
-        }
-    }
-
-    //Définition de l'objet Maze:
-    public class Maze {
-        private static final int ROAD = 0;
-        private static final int WALL = 1;
-        private static final int START = 2;
-        private static final int EXIT = 3;
-        private static final int PATH = 4;
-
-        private int[][] maze;
-        private boolean[][] visited;
-        private Coordinate start;
-        private Coordinate end;
-
-        public Maze(int[][] map, Coordinate start, Coordinate end){
-            this.maze = map;
-            this.visited = new boolean[this.getHeight()][this.getWidth()];
-            this.start = start;
-            this.end = end;
-        }
-
-        public int getHeight() {
-            return maze.length;
-        }
-
-        public int getWidth() {
-            return maze[0].length;
-        }
-
-        public Coordinate getEntry() {
-            return start;
-        }
-
-        public Coordinate getExit() {
-            return end;
-        }
-
-        public boolean isExit(int x, int y) {
-            return x == end.getX() && y == end.getY();
-        }
-
-        public boolean isStart(int x, int y) {
-            return x == start.getX() && y == start.getY();
-        }
-
-        public boolean isExplored(int row, int col) {
-            return visited[row][col];
-        }
-
-        public boolean isWall(int row, int col) {
-            return maze[row][col] == WALL;
-        }
-
-        public void setVisited(int row, int col, boolean value) {
-            visited[row][col] = value;
-        }
-
-        public boolean isValidLocation(int row, int col) {
-            if (row < 0 || row >= getHeight() || col < 0 || col >= getWidth()) {
-                return false;
-            }
-            return true;
-        }
-
-        public void reset() {
-            for (int i = 0; i < visited.length; i++)
-                Arrays.fill(visited[i], false);
-        }
-    }
-
-    //Definition de l'objet MazeSolver:
-    public class BFSMazeSolver {
-        private final int[][] DIRECTIONS = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-
-        public List<Coordinate> solve(Maze maze) {
-            LinkedList<Coordinate> nextToVisit = new LinkedList<>();
-            Coordinate start = maze.getEntry();
-            nextToVisit.add(start);
-
-            while (!nextToVisit.isEmpty()) {
-                Coordinate cur = nextToVisit.remove();
-
-                if (!maze.isValidLocation(cur.getX(), cur.getY()) || maze.isExplored(cur.getX(), cur.getY())) {
-                    continue;
-                }
-
-                if (maze.isWall(cur.getX(), cur.getY())) {
-                    maze.setVisited(cur.getX(), cur.getY(), true);
-                    continue;
-                }
-
-                if (maze.isExit(cur.getX(), cur.getY())) {
-                    return backtrackPath(cur);
-                }
-
-                for (int[] direction : DIRECTIONS) {
-                    Coordinate coordinate = new Coordinate(cur.getX() + direction[0], cur.getY() + direction[1], cur);
-                    nextToVisit.add(coordinate);
-                    maze.setVisited(cur.getX(), cur.getY(), true);
-                }
-            }
-            return Collections.emptyList();
-        }
-
-        private List<Coordinate> backtrackPath(Coordinate cur) {
-            List<Coordinate> path = new ArrayList<>();
-            Coordinate iter = cur;
-
-            while (iter != null) {
-                path.add(iter);
-                iter = iter.parent;
-            }
-
-            return path;
-        }
-    }
-
 
 
 
