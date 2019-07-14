@@ -84,11 +84,7 @@ public class VilleController {
         n.setComDMax(comDMax);
         n.setComPMax(comPMax);
         n.setPolDMax(polDMax);
-        if (polPMax < 0) {
-            n.setPolPMax(polPMax);
-        } else {
-            n.setPolPMax(0 - polPMax);
-        }
+        n.setPolPMax(polPMax);
         n.setRtbDMax(rtbDMax);
         n.setRtbPMax(rtbPMax);
         n.setForDMax(forDMax);
