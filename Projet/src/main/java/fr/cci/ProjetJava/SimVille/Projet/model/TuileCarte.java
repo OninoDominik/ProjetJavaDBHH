@@ -337,7 +337,9 @@ public class TuileCarte {
         if (D <= Dmax) {
             int[][] visited = new int[roadMap.length][roadMap[0].length];
             int distMin = this.findShortestPath(roadMap, visited, X, Y, Xc, Yc, Integer.MAX_VALUE, 0);
-            P = this.getPMax() * ((Dmax - distMin) / Dmax);
+            if(distMin<=Dmax){
+                P = this.getPMax() * ((Dmax - distMin) / Dmax);
+            }
         }
 
         return P;
